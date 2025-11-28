@@ -1,0 +1,1217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Research Ethics – Building Integrity in Research</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <style>
+        :root {
+            --primary-color: #3b82f6;
+            --primary-dark: #2563eb;
+            --primary-light: rgb(50, 181, 233);
+            --secondary-color: #64748b;
+            --text-color: #1e293b;
+            --text-light: #64748b;
+            --background: #ffffff;
+            --background-light: #f8fafc;
+            --border-color: #e2e8f0;
+            --success-color: #10b981;
+            --gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8fafc;
+            padding: 1rem;
+            min-height: 100vh;
+        }
+
+        /* Hero Section */
+        header {
+            position: relative;
+            padding: 120px 20px 80px;
+            overflow: hidden;
+            background: radial-gradient(ellipse at 50% 50%, #1a2a6c 0%, #000 100%);
+            background-size: 200% 200%;
+            animation: gradientShift 15s ease-in-out infinite;
+            min-height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px), 
+                              linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
+            background-size: 30px 30px;
+            opacity: 0.5;
+            animation: grid-pan 20s linear infinite;
+            will-change: transform;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes grid-pan {
+            0% { transform: translate(0, 0); }
+            50% { transform: translate(-12px, -12px); }
+            100% { transform: translate(0, 0); }
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        header h1 {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            font-weight: 900;
+            position: relative;
+            z-index: 1;
+            color: white;
+            text-shadow: 0 4px 20px rgba(0, 168, 255, 0.5);
+            animation: fadeInUp 1s ease-out;
+        }
+
+        header p {
+            font-size: 1.5rem;
+            opacity: 0.95;
+            position: relative;
+            z-index: 1;
+            font-weight: 300;
+            color: rgba(255, 255, 255, 0.9);
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        section {
+            background: white;
+            margin: 3rem 0;
+            padding: 3rem;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        section:hover::before {
+            left: 100%;
+        }
+
+        section:hover {
+            transform: translateY(-8px) scale(1.01);
+            box-shadow: 0 12px 40px rgba(102, 126, 234, 0.15);
+        }
+
+        section h2 {
+            color: #667eea;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        section h3 {
+            color: #764ba2;
+            font-size: 1.3rem;
+            margin: 1.5rem 0 1rem 0;
+        }
+
+        .principles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .principle-card {
+            background: linear-gradient(135deg, #f8f9ff 0%, #ffffff 100%);
+            padding: 2rem;
+            border-radius: 12px;
+            border-left: 5px solid #667eea;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .principle-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(102, 126, 234, 0.1) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .principle-card:hover::before {
+            opacity: 1;
+        }
+
+        .principle-card:hover {
+            transform: translateY(-10px) scale(1.03);
+            box-shadow: 0 15px 35px rgba(102, 126, 234, 0.3);
+            border-left-width: 8px;
+        }
+
+        .principle-card h3 {
+            margin-top: 0;
+            color: #667eea;
+            font-size: 1.2rem;
+        }
+
+        .ethical-issues {
+            list-style: none;
+            padding: 0;
+        }
+
+        .ethical-issues li {
+            background: linear-gradient(135deg, #fff5f5 0%, #ffffff 100%);
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-radius: 10px;
+            border-left: 5px solid #e53e3e;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .ethical-issues li::after {
+            content: '⚠️';
+            position: absolute;
+            right: 1.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.5rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .ethical-issues li:hover {
+            transform: translateX(10px);
+            box-shadow: 0 8px 25px rgba(229, 62, 62, 0.2);
+            background: linear-gradient(135deg, #fff5f5 0%, #ffe5e5 100%);
+        }
+
+        .ethical-issues li:hover::after {
+            opacity: 1;
+        }
+
+        .ethical-issues li strong {
+            color: #e53e3e;
+            display: block;
+            margin-bottom: 0.3rem;
+        }
+
+        .policies-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .policies-list li {
+            background: linear-gradient(135deg, #f0fdf4 0%, #ffffff 100%);
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-radius: 10px;
+            border-left: 5px solid #22c55e;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .policies-list li::after {
+            content: '✅';
+            position: absolute;
+            right: 1.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.5rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .policies-list li:hover {
+            transform: translateX(10px);
+            box-shadow: 0 8px 25px rgba(34, 197, 94, 0.2);
+            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+        }
+
+        .policies-list li:hover::after {
+            opacity: 1;
+        }
+
+        .policies-list li strong {
+            color: #16a34a;
+        }
+
+        .tips-list {
+            display: grid;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .tip-item {
+            background: linear-gradient(135deg, #fef3c7 0%, #ffffff 100%);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border-left: 5px solid #f59e0b;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .tip-item::after {
+            content: '💡';
+            position: absolute;
+            right: 1.5rem;
+            top: 50%;
+            transform: translateY(-50%) scale(1);
+            font-size: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .tip-item:hover {
+            transform: translateX(10px);
+            box-shadow: 0 8px 25px rgba(245, 158, 11, 0.2);
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+        }
+
+        .tip-item:hover::after {
+            transform: translateY(-50%) scale(1.3) rotate(15deg);
+        }
+
+        .case-study {
+            background: linear-gradient(135deg, #e0f2fe 0%, #ffffff 100%);
+            padding: 2rem;
+            border-radius: 12px;
+            margin: 1.5rem 0;
+            border-left: 5px solid #0284c7;
+            transition: all 0.4s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .case-study::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 0;
+            background: linear-gradient(to bottom, #0284c7, #38bdf8);
+            transition: height 0.4s ease;
+        }
+
+        .case-study:hover::before {
+            height: 100%;
+        }
+
+        .case-study:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(2, 132, 199, 0.2);
+            background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%);
+        }
+
+        .feedback-section {
+            background: linear-gradient(135deg, #fafafa 0%, #ffffff 100%);
+            padding: 3rem;
+            border-radius: 16px;
+            border: 3px dashed #667eea;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feedback-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(102, 126, 234, 0.05) 0%, transparent 70%);
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+
+        .feedback-section:hover {
+            border-color: #764ba2;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.2);
+            transform: scale(1.02);
+        }
+
+        .feedback-section textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-family: inherit;
+            font-size: 1rem;
+            resize: vertical;
+            transition: all 0.3s ease;
+            background-color: white;
+            color: #333;
+            cursor: text;
+        }
+
+        .feedback-section textarea:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+            outline: none;
+        }
+
+        .feedback-section button {
+            background: #667eea;
+            color: white;
+            padding: 0.8rem 2rem;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-top: 1rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feedback-section button:hover {
+            background: #764ba2;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .feedback-section button:active {
+            transform: translateY(0);
+        }
+
+        .feedback-section button::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 5px;
+            height: 5px;
+            background: rgba(255, 255, 255, 0.5);
+            opacity: 0;
+            border-radius: 100%;
+            transform: scale(1, 1) translate(-50%);
+            transform-origin: 50% 50%;
+        }
+
+        .feedback-section button:focus:not(:active)::after {
+            animation: ripple 1s ease-out;
+        }
+
+        @keyframes ripple {
+            0% {
+                transform: scale(0, 0);
+                opacity: 0.5;
+            }
+            100% {
+                transform: scale(20, 20);
+                opacity: 0;
+            }
+        }
+
+        .feedback-success {
+            background: linear-gradient(135deg, #d1fae5 0%, #ecfdf5 100%);
+            color: #065f46;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+            text-align: center;
+            border-left: 5px solid #10b981;
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(-10px);
+            height: 0;
+            overflow: hidden;
+        }
+
+        .feedback-success.show {
+            opacity: 1;
+            transform: translateY(0);
+            height: auto;
+            padding: 1rem;
+        }
+
+        footer {
+            background: #2d3748;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        footer a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        footer a:hover {
+            color: #764ba2;
+        }
+
+        .intro-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #555;
+        }
+
+        .intro-text p {
+            margin-bottom: 1rem;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .icon {
+            font-size: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8rem;
+            }
+
+            .principles-grid {
+                grid-template-columns: 1fr;
+            }
+
+            section {
+                padding: 1.5rem;
+            }
+        }
+
+        /* Navigation Styles */
+        .landing-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #667eea;
+            text-decoration: none;
+        }
+
+        .nav-brand i {
+            font-size: 1.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: #333;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #667eea;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            color: white;
+            padding: 0.8rem 2rem;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary-light));
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.5);
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #333;
+        }
+
+        .dark-toggle {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border: none;
+            color: white;
+            cursor: pointer;
+            padding: 8px 12px;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease;
+        }
+
+        .dark-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-toggle {
+                display: block;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                right: -100%;
+                flex-direction: column;
+                background: white;
+                width: 250px;
+                padding: 2rem;
+                box-shadow: -2px 0 10px rgba(0,0,0,0.1);
+                transition: right 0.3s ease;
+                height: calc(100vh - 70px);
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+        }
+
+        /* Footer Styles */
+        .modern-footer {
+            width: 100vw;
+            margin-left: calc(-50vw + 50%);
+            background: linear-gradient(135deg, #1f3c88, #2c5aa0);
+            color: #fff;
+            padding: 60px 20px 20px;
+            border-radius: 25px 25px 0 0;
+            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.2);
+            overflow-x: hidden;
+        }
+
+        .footer-top {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 30px;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .footer-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .footer-card h4 {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+            padding-bottom: 8px;
+        }
+
+        .footer-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-card ul li {
+            margin-bottom: 8px;
+        }
+
+        .footer-card ul li a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: 0.3s;
+            padding: 5px;
+        }
+
+        .footer-card ul li a:hover {
+            color: #fff;
+            transform: translateX(5px);
+        }
+
+        .subscribe-form {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            width: 100%;
+        }
+
+        .subscribe-form input {
+            width: 100%;
+            padding: 0.6rem;
+            border: none;
+            border-radius: 5px;
+            outline: none;
+            box-sizing: border-box;
+        }
+
+        .subscribe-form button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 0.6rem 1.2rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.3s ease;
+            width: 100%;
+            white-space: nowrap;
+        }
+
+        .subscribe-form button:hover {
+            background: #764ba2;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            padding-top: 20px;
+            margin-top: 20px;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .heart {
+            color: #ff6b6b;
+        }
+
+        /* Dark Mode Styles */
+        body.dark-mode {
+            background-color: #1a202c;
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .landing-nav {
+            background-color: #2d3748;
+        }
+
+        body.dark-mode .nav-links a {
+            color: #e2e8f0;
+        }
+
+        body.dark-mode section {
+            background: #2d3748;
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .intro-text {
+            color: #e2e8f0 !important;
+        }
+
+        body.dark-mode .intro-text p {
+            color: #e2e8f0 !important;
+        }
+
+        body.dark-mode .principle-card {
+            background: #1a202c;
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .principle-card p {
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .ethical-issues li {
+            background: #2d1f1f;
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .policies-list li {
+            background: #1f2d1f;
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .tip-item {
+            background: #2d2a1f;
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .case-study {
+            background: #1f2a2d;
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .feedback-section {
+            background: #1a202c;
+            border-color: #667eea;
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .feedback-section textarea {
+            background-color: #2d3748;
+            color: #e2e8f0;
+            border-color: #4a5568;
+        }
+
+        body.dark-mode .modern-footer {
+            background: linear-gradient(135deg, #1a202c, #2d3748);
+        }
+
+        @media (max-width: 768px) {
+            body.dark-mode .nav-links {
+                background: #2d3748;
+            }
+            
+            .subscribe-form {
+                flex-direction: column;
+            }
+            
+            .subscribe-form input,
+            .subscribe-form button {
+                width: 100%;
+            }
+        }
+
+        /* Add padding top to body for fixed nav */
+        body {
+            padding-top: 80px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="landing-nav">
+        <div class="nav-container">
+            <a href="index.html" class="nav-brand">
+                <i class="fas fa-book-open"></i>
+                <span>ScholarSync</span>
+            </a>
+            <button class="mobile-menu-toggle" aria-label="Toggle menu">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="nav-links">
+                <a href="index.html#features">Features</a>
+                <a href="index.html#how-it-works">How it Works</a>
+                <a href="about.html">About</a>
+                <a href="tools.html">Tools</a>
+                <a href="contact.html">Contact</a>
+                <button class="btn-primary" onclick="window.location.href='signup.html'">
+                    Get Started
+                </button>
+                <button class="dark-toggle" id="darkModeToggle" title="Toggle Dark Mode">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <header>
+        <div class="hero-content">
+            <h1>Research Ethics – Building Integrity in Research</h1>
+            <p>Upholding the Highest Standards of Academic Excellence</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- 1. Introduction -->
+        <section>
+            <h2><span class="icon">🧩</span> Introduction</h2>
+            <div class="intro-text">
+                <p><strong>Research ethics</strong> refers to the moral principles and professional standards that guide researchers in planning, conducting, and reporting research.</p>
+                <p style="margin-top: 1rem;">Ethical practices ensure that research is honest, transparent, and respectful toward participants, data, and the academic community.</p>
+                <p style="margin-top: 1rem;">This page aims to guide students, researchers, and academicians in following responsible research practices and upholding the highest standards of integrity.</p>
+            </div>
+        </section>
+
+        <!-- 2. Core Principles -->
+        <section>
+            <h2><span class="icon">📘</span> Core Principles of Research Ethics</h2>
+            <div class="principles-grid">
+                <div class="principle-card">
+                    <h3>Honesty</h3>
+                    <p>Present data truthfully, avoid fabrication or falsification. Report findings accurately and do not manipulate results to fit desired outcomes.</p>
+                </div>
+                <div class="principle-card">
+                    <h3>Objectivity</h3>
+                    <p>Avoid bias and ensure results are fair and balanced. Let the data speak for itself without personal or external influences.</p>
+                </div>
+                <div class="principle-card">
+                    <h3>Integrity</h3>
+                    <p>Follow moral and professional standards at every stage. Maintain consistency between your research actions and ethical principles.</p>
+                </div>
+                <div class="principle-card">
+                    <h3>Carefulness</h3>
+                    <p>Avoid careless errors and double-check your work. Maintain meticulous records and verify calculations and analyses.</p>
+                </div>
+                <div class="principle-card">
+                    <h3>Respect for Intellectual Property</h3>
+                    <p>Always cite sources and avoid plagiarism. Give proper credit to others' ideas, work, and contributions.</p>
+                </div>
+                <div class="principle-card">
+                    <h3>Confidentiality</h3>
+                    <p>Protect sensitive information and participant privacy. Handle personal data with care and follow data protection regulations.</p>
+                </div>
+                <div class="principle-card">
+                    <h3>Social Responsibility</h3>
+                    <p>Strive to improve society and not cause harm. Consider the broader impact of your research on communities and the environment.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Common Ethical Issues -->
+        <section>
+            <h2><span class="icon">⚖</span> Common Ethical Issues in Research</h2>
+            <ul class="ethical-issues">
+                <li>
+                    <strong>Plagiarism</strong>
+                    Using someone else's work or ideas without proper credit or citation. This includes copying text, data, or concepts without acknowledgment.
+                </li>
+                <li>
+                    <strong>Data Falsification</strong>
+                    Manipulating or fabricating data to fit a hypothesis or desired outcome. This undermines the validity of research findings.
+                </li>
+                <li>
+                    <strong>Duplicate Publication</strong>
+                    Submitting the same research to multiple journals without disclosure or publishing the same results multiple times.
+                </li>
+                <li>
+                    <strong>Authorship Disputes</strong>
+                    Listing people as authors who didn't contribute significantly, or excluding contributors who deserve authorship credit.
+                </li>
+                <li>
+                    <strong>Conflict of Interest</strong>
+                    Not disclosing personal, financial, or professional biases that could influence research design, conduct, or interpretation.
+                </li>
+            </ul>
+        </section>
+
+        <!-- 4. Policies and Standards -->
+        <section>
+            <h2><span class="icon">📜</span> Research Ethics Policies and Standards</h2>
+            <p>Well-established global and institutional guidelines that provide frameworks for ethical research:</p>
+            <ul class="policies-list">
+                <li>
+                    <strong>The Belmont Report (1979)</strong> – Outlines three core principles: Respect for persons, beneficence, and justice. A foundational document for human subjects research.
+                </li>
+                <li>
+                    <strong>Declaration of Helsinki</strong> – Ethical principles for medical research involving humans, developed by the World Medical Association.
+                </li>
+                <li>
+                    <strong>Committee on Publication Ethics (COPE)</strong> – Provides guidelines for fair publishing practices and addresses publication ethics issues.
+                </li>
+                <li>
+                    <strong>ICMR Guidelines (India)</strong> – Ethical principles for biomedical and health research, developed by the Indian Council of Medical Research.
+                </li>
+            </ul>
+            <p style="margin-top: 1.5rem; font-style: italic; color: #666;">
+                💡 Tip: Consult your institution's research ethics committee or IRB (Institutional Review Board) for specific guidelines applicable to your research.
+            </p>
+        </section>
+
+        <!-- 5. Tips for Maintaining Integrity -->
+        <section>
+            <h2><span class="icon">✍</span> Tips for Maintaining Research Integrity</h2>
+            <div class="tips-list">
+                <div class="tip-item">
+                    📓 <strong>Keep a Research Diary:</strong> Maintain a detailed logbook documenting your research process, decisions, and observations.
+                </div>
+                <div class="tip-item">
+                    🔍 <strong>Use Plagiarism Detection Tools:</strong> Check your work with tools like Turnitin, iThenticate, or Grammarly before submission.
+                </div>
+                <div class="tip-item">
+                    🏆 <strong>Credit All Contributors:</strong> Properly acknowledge everyone who contributed to your research, including advisors, collaborators, and funding sources.
+                </div>
+                <div class="tip-item">
+                    🔒 <strong>Store Data Securely:</strong> Maintain data transparency and use secure storage methods. Follow data management best practices.
+                </div>
+                <div class="tip-item">
+                    👥 <strong>Seek Feedback:</strong> Get mentor or peer review before publishing. Fresh perspectives can identify potential ethical concerns.
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. Case Studies -->
+        <section>
+            <h2><span class="icon">💬</span> Case Studies and Examples</h2>
+            
+            <div class="case-study">
+                <h3>📌 Case Study 1: The Cost of Plagiarism</h3>
+                <p><strong>Scenario:</strong> A graduate student copied substantial portions of their literature review from published papers without proper citation.</p>
+                <p><strong>Consequences:</strong> The plagiarism was detected during thesis review, resulting in rejection of the thesis, academic probation, and damage to the student's reputation.</p>
+                <p><strong>Lesson:</strong> Always cite sources properly and use plagiarism detection tools. Paraphrasing still requires citation.</p>
+            </div>
+
+            <div class="case-study">
+                <h3>📌 Case Study 2: Integrity Builds Credibility</h3>
+                <p><strong>Scenario:</strong> A research team discovered unexpected results that contradicted their hypothesis during a clinical study.</p>
+                <p><strong>Action:</strong> Instead of hiding the data, they reported all findings transparently and investigated further.</p>
+                <p><strong>Outcome:</strong> Their honesty led to a breakthrough discovery in treatment protocols, earning them recognition and additional funding.</p>
+                <p><strong>Lesson:</strong> Ethical research practices enhance credibility and can lead to unexpected positive outcomes.</p>
+            </div>
+        </section>
+
+        <!-- 7. Feedback Section -->
+        <section>
+            <h2><span class="icon">🧠</span> Review & Feedback</h2>
+            <div class="feedback-section">
+                <p style="margin-bottom: 1rem; font-size: 1.1rem;">We value your thoughts and suggestions on research ethics. Your feedback helps us improve this resource for the academic community.</p>
+                <form id="feedbackForm">
+                    <label for="feedback"><strong>Share your thoughts or suggestions:</strong></label><br>
+                    <textarea id="feedback" name="feedback" rows="6" placeholder="Write your feedback here... Share your experiences, suggest improvements, or contribute case studies."></textarea><br>
+                    <button type="submit" id="submitBtn">Submit Feedback</button>
+                </form>
+                <div id="feedbackSuccess" class="feedback-success">
+                    <strong>Thank you for your feedback!</strong> We appreciate your contribution to improving research ethics education.
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer (aligned with homepage footer) -->
+    <footer class="modern-footer" aria-label="Main Footer">
+        <div class="footer-top">
+            <div class="footer-card">
+                <h4>ScholarSync</h4>
+                <p>Your comprehensive research companion for organizing, citing, and managing academic papers with integrity.</p>
+            </div>
+            <div class="footer-card">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="tools.html"><i class="fas fa-tools"></i> Tools</a></li>
+                    <li><a href="about.html"><i class="fas fa-info-circle"></i> About</a></li>
+                    <li><a href="contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-card">
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="blog.html"><i class="fas fa-blog"></i> Blog</a></li>
+                    <li><a href="glossary.html"><i class="fas fa-book"></i> Glossary</a></li>
+                    <li><a href="Tag-Based-filtering.html"><i class="fas fa-tags"></i> Tag Based Filtering</a></li>
+                    <li><a href="research ethics.html"><i class="fas fa-balance-scale"></i> Research Ethics</a></li>
+                </ul>
+            </div>
+            <div class="footer-card">
+                <h4>Stay Updated</h4>
+                <p>Subscribe to our newsletter for research tips and updates.</p>
+                <div class="subscribe-form" role="form" aria-label="Subscribe form">
+                    <input type="email" placeholder="Your email" aria-label="Email address">
+                    <button type="submit">Subscribe</button>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 ScholarSync. All rights reserved. | Made with <span class="heart">❤️</span> for the research community</p>
+        </div>
+    </footer>
+
+    <!-- Mobile Menu Toggle Script -->
+    <script>
+        (function() {
+            const toggle = document.querySelector('.mobile-menu-toggle');
+            const navLinksMenu = document.querySelector('.nav-links');
+
+            if (toggle && navLinksMenu) {
+                toggle.addEventListener('click', () => {
+                    navLinksMenu.classList.toggle('active');
+                });
+
+                navLinksMenu.querySelectorAll('a').forEach(link => {
+                    link.addEventListener('click', () => {
+                        navLinksMenu.classList.remove('active');
+                    });
+                });
+            }
+        })();
+    </script>
+ 
+    <!-- Dark Mode Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const darkModeToggle = document.getElementById('darkModeToggle');
+            const navLinks = document.querySelector('.nav-links');
+
+            function updateNavLinksBackground() {
+                if (!navLinks) return;
+                if (document.body.classList.contains('dark-mode')) {
+                    navLinks.style.backgroundColor = '#1e293b';
+                } else {
+                    navLinks.style.backgroundColor = 'white';
+                }
+            }
+
+            if (darkModeToggle) {
+                const icon = darkModeToggle.querySelector('i');
+
+                // Check for saved dark mode preference
+                if (localStorage.getItem('darkMode') === 'enabled') {
+                    document.body.classList.add('dark-mode');
+                    if (icon) icon.classList.replace('fa-moon', 'fa-sun');
+                    updateNavLinksBackground();
+                }
+
+                darkModeToggle.addEventListener('click', () => {
+                    document.body.classList.toggle('dark-mode');
+
+                    if (document.body.classList.contains('dark-mode')) {
+                        if (icon) icon.classList.replace('fa-moon', 'fa-sun');
+                        localStorage.setItem('darkMode', 'enabled');
+                    } else {
+                        if (icon) icon.classList.replace('fa-sun', 'fa-moon');
+                        localStorage.setItem('darkMode', 'disabled');
+                    }
+                    updateNavLinksBackground();
+                });
+            } else {
+                // If no toggle element, still apply saved preference safely
+                if (localStorage.getItem('darkMode') === 'enabled') {
+                    document.body.classList.add('dark-mode');
+                    updateNavLinksBackground();
+                }
+            }
+        });
+    </script>
+ 
+    <!-- Feedback Form Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const feedbackForm = document.getElementById('feedbackForm');
+            const feedbackTextarea = document.getElementById('feedback');
+            const feedbackSuccess = document.getElementById('feedbackSuccess');
+
+            if (!feedbackForm || !feedbackTextarea) return;
+
+            // Make sure the textarea is focusable and editable
+            feedbackTextarea.setAttribute('tabindex', '0');
+
+            // Load existing feedback from localStorage if available
+            (function loadFeedback() {
+                try {
+                    const feedbacks = JSON.parse(localStorage.getItem('researchEthicsFeedback')) || [];
+                    console.log('Loaded feedbacks:', feedbacks);
+                } catch (err) {
+                    console.warn('Could not load feedbacks', err);
+                }
+            })();
+
+            feedbackForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                const feedback = feedbackTextarea.value.trim();
+
+                if (feedback) {
+                    saveFeedback(feedback);
+                    if (feedbackSuccess) feedbackSuccess.classList.add('show');
+                    feedbackForm.reset();
+                    setTimeout(() => {
+                        if (feedbackSuccess) feedbackSuccess.classList.remove('show');
+                    }, 5000);
+                } else {
+                    feedbackTextarea.focus();
+                }
+            });
+
+            function saveFeedback(feedback) {
+                try {
+                    let feedbacks = JSON.parse(localStorage.getItem('researchEthicsFeedback')) || [];
+                    const newFeedback = { text: feedback, timestamp: new Date().toISOString() };
+                    feedbacks.push(newFeedback);
+                    localStorage.setItem('researchEthicsFeedback', JSON.stringify(feedbacks));
+                    console.log('Feedback saved:', newFeedback);
+                } catch (err) {
+                    console.error('Failed to save feedback', err);
+                }
+            }
+        });
+    </script>
+</body>
+</html>

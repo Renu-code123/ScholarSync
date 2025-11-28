@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AI Paper Summarizer | ScholarSync</title>
+  <link rel="shortcut icon" href="./favicon/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="./favicon/favicon-48x48.png" type="image/png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png" />
+  <link rel="manifest" href="./favicon/site.webmanifest" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <style>
+    :root {
+      --primary: #2f2ca0;
+      --primary-dark: #4698e5;
+      --text-dark: #1f2937;
+      --gray: #6b7280;
+    }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: linear-gradient(135deg, #dbeafe 0%, #e0e7ff 100%); margin: 0; padding: 1rem; color: var(--text-dark); }
+    .container { max-width: 900px; margin: 0 auto; }
+    .page-header { background: white; border-radius: 16px; box-shadow: 0 4px 20px rgba(99,102,241,0.15); padding: 2rem; text-align:center; margin-bottom:2rem; }
+    .page-title { font-size: 2rem; font-weight: bold; display:flex; justify-content:center; gap:0.5rem; align-items:center; }
+    .tabs { display:flex; justify-content:center; gap:1rem; margin-bottom:1rem; }
+    .tab-btn { padding:0.75rem 1.5rem; border:none; border-radius:12px; cursor:pointer; background:#f3f4f6; color:var(--text-dark); font-weight:bold; transition:all 0.3s ease; }
+    .tab-btn.active { background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color:#fff; box-shadow:0 6px 14px rgba(99,102,241,0.3); }
+    .tab-content { display:none; background:white; border-radius:16px; padding:2rem; box-shadow:0 4px 20px rgba(99,102,241,0.15); }
+    .tab-content.active { display:block; }
+    .file-upload { text-align:center; margin-bottom:2rem; }
+    input[type=file] { padding:1rem; border:2px dashed #c7d2fe; border-radius:12px; background:#f8fafc; cursor:pointer; margin-bottom:1rem; }
+    button { border:none; cursor:pointer; border-radius:12px; padding:0.75rem 1.5rem; font-weight:bold; margin-top:1rem; background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color:white; transition:all 0.3s ease; }
+    button:hover { transform:translateY(-2px); box-shadow:0 6px 14px rgba(99,102,241,0.3); }
+    #summaryText { background:#f8fafc; padding:1.5rem; border-radius:12px; border:1px solid #e2e8f0; line-height:1.7; white-space: pre-line; }
+    canvas { max-width:100%; margin-top:1rem; }
+    .chat-box { border:1px solid #ddd; padding:1rem; max-height:250px; overflow-y:auto; background:#f9fafb; border-radius:12px; }
+    .chat-input { width:calc(100% - 90px); padding:0.75rem; margin-top:0.5rem; border:1px solid #ddd; border-radius:8px; }
+    #sendChat { margin-left:0.5rem; padding:0.75rem 1rem; }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="page-header">
+    <h1 class="page-title"><i class="fas fa-brain"></i> AI Research Paper Assistant</h1>
+    <p class="page-subtitle">Upload your PDF for a summary, visuals, and an AI assistant</p>
+  </div>
+
+  <div class="file-upload">
+    <input type="file" id="pdfFile" accept="application/pdf"/>
+    <br/>
+    <button id="processBtn"><i class="fas fa-magic"></i> Upload & Analyze</button>
+  </div>
+
+  <div class="tabs">
+    <button class="tab-btn active" data-tab="summary">🧠 Summary</button>
+    <button class="tab-btn" data-tab="visuals">📊 Visuals</button>
+    <button class="tab-btn" data-tab="assistant">🤖 AI Assistant</button>
+  </div>
+
+  <div id="summary" class="tab-content active">
+    <h2>Summary</h2>
+    <p id="summaryText"></p>
+    <button id="readAloud">🔊 Read Aloud</button>
+  </div>
+
+  <div id="visuals" class="tab-content">
+    <h2>Keyword Chart</h2>
+    <canvas id="keywordChart"></canvas>
+  </div>
+
+  <div id="assistant" class="tab-content">
+    <h2>Ask the AI Assistant</h2>
+    <div id="chat" class="chat-box"></div>
+    <input type="text" id="chatInput" class="chat-input" placeholder="Ask something..."/>
+    <button id="sendChat">Send</button>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  // Tab switching
+  document.querySelectorAll(".tab-btn").forEach(btn=>{
+    btn.addEventListener("click", ()=>{
+      document.querySelectorAll(".tab-btn").forEach(b=>b.classList.remove("active"));
+      document.querySelectorAll(".tab-content").forEach(c=>c.classList.remove("active"));
+      btn.classList.add("active");
+      document.getElementById(btn.dataset.tab).classList.add("active");
+    });
+  });
+
+  let fullText = "";
+
+  // Upload & process PDF
+  document.getElementById("processBtn").addEventListener("click", async ()=>{
+    const fileInput = document.getElementById("pdfFile");
+    if(!fileInput.files[0]) return Swal.fire("Error","Upload a PDF first!","error");
+    const formData = new FormData();
+    formData.append("file", fileInput.files[0]);
+    try{
+      const res = await fetch("http://127.0.0.1:5000/summarize",{method:"POST",body:formData});
+      const data = await res.json();
+      if(data.summary){
+        fullText = data.full_text; // save full text for AI
+        document.getElementById("summaryText").innerText = data.summary;
+        const ctx = document.getElementById('keywordChart').getContext('2d');
+        new Chart(ctx,{
+          type:'bar',
+          data:{
+            labels:data.keywords.map(k=>k.word),
+            datasets:[{label:'Frequency', data:data.keywords.map(k=>k.count)}]
+          }
+        });
+        Swal.fire("Success","PDF processed!","success");
+      } else {
+        Swal.fire("Error", data.error || "Could not summarize.","error");
+      }
+    }catch(err){
+      console.error(err);
+      Swal.fire("Error","Server error","error");
+    }
+  });
+
+  // Read aloud
+  document.getElementById("readAloud").addEventListener("click", ()=>{
+    const msg = new SpeechSynthesisUtterance(document.getElementById("summaryText").innerText);
+    speechSynthesis.speak(msg);
+  });
+
+  // Chat AI Assistant
+  document.getElementById("sendChat").addEventListener("click", async ()=>{
+    const input = document.getElementById("chatInput");
+    const chat = document.getElementById("chat");
+    const message = input.value.trim();
+    if(!message) return;
+
+    chat.innerHTML += `<div><b>You:</b> ${message}</div>`;
+    input.value = "";
+    chat.scrollTop = chat.scrollHeight;
+
+    try{
+      const res = await fetch("http://127.0.0.1:5000/chat",{
+        method:"POST",
+        headers:{"Content-Type":"application/json"},
+        body:JSON.stringify({message})
+      });
+      const data = await res.json();
+      if(data.response){
+        chat.innerHTML += `<div><b>AI:</b> ${data.response}</div>`;
+        chat.scrollTop = chat.scrollHeight;
+      } else {
+        chat.innerHTML += `<div><b>AI:</b> Could not generate response.</div>`;
+      }
+    }catch(err){
+      console.error(err);
+      chat.innerHTML += `<div><b>AI:</b> Server error.</div>`;
+    }
+  });
+</script>
+  <script>
+    fetch("footer.html")
+      .then((response) => response.text())
+      .then((data) => {
+        document.body.insertAdjacentHTML("beforeend", data);
+      });
+  </script>
+</body>
+</html>

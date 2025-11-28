@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Settings | Research Paper Organizer</title>
+    <link rel="stylesheet" href="css/profile-settings.css">
+    <link rel="shortcut icon" href="./favicon/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="./favicon/favicon-48x48.png" type="image/png" />
+
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="./favicon/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="48x48"
+      href="./favicon/favicon-48x48.png"
+    />
+    <link rel="manifest" href="./favicon/site.webmanifest" />
+</head>
+<body>
+    <div class="profile-settings-container">
+        <h1>User Profile & Settings</h1>
+        <form id="profileForm">
+            <section>
+                <h2>Account Information</h2>
+                <label>Email: <input type="email" id="email" name="email"></label><br>
+                <label>Username: <input type="text" id="username" name="username"></label><br>
+                <button type="button" id="updateAccountBtn">Update Account</button>
+            </section>
+            <section>
+                <h2>Preferences</h2>
+                <label>Theme:
+                    <select id="theme" name="theme">
+                        <option value="light">Light</option>
+                        <option value="dark">Dark</option>
+                    </select>
+                </label><br>
+                <button type="button" id="updatePreferencesBtn">Save Preferences</button>
+            </section>
+            <section>
+                <h2>Notification Settings</h2>
+                <label><input type="checkbox" id="emailNotifications"> Email Notifications</label><br>
+                <label><input type="checkbox" id="pushNotifications"> Push Notifications</label><br>
+                <button type="button" id="updateNotificationsBtn">Save Notifications</button>
+            </section>
+        </form>
+        <div id="profileMessage"></div>
+    </div>
+    <script src="js/profile-settings.js"></script>
+  <script>
+    fetch("footer.html")
+      .then((response) => response.text())
+      .then((data) => {
+        document.body.insertAdjacentHTML("beforeend", data);
+      });
+  </script>
+</body>
+</html>

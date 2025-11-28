@@ -1,0 +1,1512 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Research Paper Organizer | ScholarSync</title>
+  <link rel="shortcut icon" href="./favicon/favicon.ico" type="image/x-icon">
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <!-- Global site styles for consistent header/footer colors -->
+  <link rel="stylesheet" href="css/style.css" />
+  <!-- Page-specific styles -->
+  <link rel="stylesheet" href="css/add-organize-papers.css" />
+  <link rel="stylesheet" href="css/footer.css" />
+  <link rel="icon" href="./favicon/favicon-48x48.png" type="image/png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="48x48" href="./favicon/favicon-48x48.png" />
+  <link rel="manifest" href="./favicon/site.webmanifest" />
+  <style>
+    /* Enhanced CSS for better UI/UX */
+    :root {
+      --primary: #3b82f6;
+      --primary-dark: #1d4ed8;
+      --bg-dark: #0f172a;
+      --surface-dark: #1e293b;
+      --surface-dark-alt: #334155;
+      --border-dark: #475569;
+      --text-light: #f8fafc;
+      --text-dark: #cbd5e1;
+      --bg-light: #f8fafc;
+      --surface-light: #ffffff;
+      --surface-light-alt: #f1f5f9;
+      --border-light: #e2e8f0;
+      --text-dark-primary: #1e293b;
+      --text-dark-secondary: #64748b;
+      --accent: #8b5cf6;
+      --success: #10b981;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      background: var(--bg-dark);
+      margin: 0;
+      padding: 1rem;
+      line-height: 1.6;
+      color: var(--text-light);
+      transition: background 0.3s, color 0.3s;
+    }
+
+    body.dark-mode {
+      --bg-color: var(--bg-dark);
+      --surface-color: var(--surface-dark);
+      --surface-alt: var(--surface-dark-alt);
+      --border-color: var(--border-dark);
+      --text-primary: var(--text-light);
+      --text-secondary: var(--text-dark);
+    }
+
+    body:not(.dark-mode) {
+      --bg-color: var(--bg-light);
+      --surface-color: var(--surface-light);
+      --surface-alt: var(--surface-light-alt);
+      --border-color: var(--border-light);
+      --text-primary: var(--text-dark-primary);
+      --text-secondary: var(--text-dark-secondary);
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    /* Enhanced Navbar */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 1.5rem;
+      background: var(--surface-color);
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      margin-bottom: 1.5rem;
+      border: 1px solid var(--border-color);
+      transition: all 0.3s ease;
+    }
+
+    .navbar-left {
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-home-item {
+      font-weight: 700;
+      font-size: 1.25rem;
+      color: var(--primary);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .navbar-right-links {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .nav-item {
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      text-decoration: none;
+      color: var(--text-primary);
+      font-weight: 500;
+      transition: all 0.2s ease;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: transparent;
+    }
+
+    .nav-item:hover {
+      background: var(--surface-alt);
+      color: var(--primary);
+    }
+
+    .nav-item.active {
+      background: var(--primary);
+      color: white;
+    }
+
+    .hamburger-container {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      gap: 4px;
+    }
+
+    .bar {
+      width: 25px;
+      height: 3px;
+      background: var(--text-primary);
+      border-radius: 2px;
+      transition: 0.3s;
+    }
+
+    .dark-toggle {
+      background: var(--surface-alt);
+      border: 1px solid var(--border-color);
+      color: var(--text-primary);
+      padding: 0.5rem;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .dark-toggle:hover {
+      background: var(--primary);
+      color: white;
+    }
+
+    .dark-toggle .fa-sun {
+      display: none;
+    }
+
+    body:not(.dark-mode) .dark-toggle .fa-sun {
+      display: inline-block;
+    }
+
+    body:not(.dark-mode) .dark-toggle .fa-moon {
+      display: none;
+    }
+
+    /* Header Section */
+    .header {
+      background: var(--surface-color);
+      border-radius: 16px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      border: 1px solid var(--border-color);
+    }
+
+    .header-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.5rem;
+    }
+
+    .header-title h1 {
+      margin: 0 0 0.25rem 0;
+      font-size: 1.75rem;
+      color: var(--text-primary);
+    }
+
+    .header-title p {
+      margin: 0;
+      opacity: 0.9;
+      color: var(--text-secondary);
+    }
+
+    .header-actions {
+      display: flex;
+      gap: 0.75rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .action-btn {
+      padding: 0.75rem 1.25rem;
+      border-radius: 10px;
+      background: var(--primary);
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.2s ease;
+      box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
+    }
+
+    .action-btn:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+    }
+
+    .action-btn.secondary {
+      background: var(--surface-alt);
+      color: var(--text-primary);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .action-btn.secondary:hover {
+      background: var(--border-color);
+    }
+
+    /* Filters Section */
+    .filters-section {
+      background: var(--surface-color);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      border: 1px solid var(--border-color);
+    }
+
+    .filters-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .filter-select {
+      background: var(--surface-alt);
+      color: var(--text-primary);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 0.75rem;
+      width: 100%;
+      font-size: 0.9rem;
+      transition: all 0.2s ease;
+    }
+
+    .filter-select:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+    }
+
+    /* Search Section */
+    .search-section {
+      background: var(--surface-color);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      border: 1px solid var(--border-color);
+    }
+
+    .search-box {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      background: var(--surface-alt);
+      border: 1px solid var(--border-color);
+      padding: 0.75rem 1rem;
+      border-radius: 12px;
+      transition: all 0.2s ease;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .search-box:focus-within {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+    }
+
+    #searchPapers {
+      background: transparent;
+      border: none;
+      color: var(--text-primary);
+      outline: none;
+      width: 100%;
+      font-size: 1rem;
+    }
+
+    #searchPapers::placeholder {
+      color: var(--text-secondary);
+    }
+
+    /* Tags Section */
+    .tags-section {
+      background: var(--surface-color);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      border: 1px solid var(--border-color);
+    }
+
+    .tags-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      justify-content: center;
+    }
+
+    .tag {
+      background: var(--surface-alt);
+      color: var(--text-primary);
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      border: 1px solid var(--border-color);
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .tag:hover {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
+
+    /* Main Content Grid */
+    .organizer-grid {
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: 1.5rem;
+      align-items: start;
+    }
+
+    /* Papers List */
+    .papers-list-container {
+      background: var(--surface-color);
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      border: 1px solid var(--border-color);
+    }
+
+    .papers-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .blog-card {
+      background: var(--surface-alt);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 1.25rem;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .blog-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+      border-color: var(--primary);
+    }
+
+    .blog-card.active {
+      border-color: var(--primary);
+      background: rgba(59, 130, 246, 0.05);
+    }
+
+    .blog-content h2 {
+      font-size: 1.2rem;
+      margin: 0 0 0.5rem 0;
+      color: var(--text-primary);
+    }
+
+    .blog-content p {
+      margin: 0 0 0.75rem 0;
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+    }
+
+    .tags {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.75rem;
+    }
+
+    .badge {
+      padding: 0.25rem 0.75rem;
+      border-radius: 12px;
+      font-size: 0.8rem;
+      font-weight: 500;
+    }
+
+    .badge-tools {
+      background: rgba(59, 130, 246, 0.1);
+      color: var(--primary);
+      border: 1px solid rgba(59, 130, 246, 0.3);
+    }
+
+    .badge-tips {
+      background: rgba(139, 92, 246, 0.1);
+      color: var(--accent);
+      border: 1px solid rgba(139, 92, 246, 0.3);
+    }
+
+    .card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 0.75rem;
+    }
+
+    .rating {
+      color: #fbbf24;
+      font-size: 0.9rem;
+    }
+
+    .card-actions {
+      display: flex;
+      gap: 0.75rem;
+      opacity: 0.7;
+    }
+
+    .card-actions i {
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .card-actions i:hover {
+      opacity: 1;
+      color: var(--primary);
+    }
+
+    /* Details Panel */
+    .details-panel {
+      background: var(--surface-color);
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      border: 1px solid var(--border-color);
+      min-height: 400px;
+      position: sticky;
+      top: 1.5rem;
+    }
+
+    .placeholder {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 300px;
+      color: var(--text-secondary);
+      text-align: center;
+    }
+
+    .placeholder i {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      opacity: 0.5;
+    }
+
+    /* Footer */
+    .footer-container {
+      margin-top: 2rem;
+      background: var(--surface-color);
+      border-radius: 12px;
+      padding: 2rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      border: 1px solid var(--border-color);
+    }
+
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+    }
+
+    .footer-section h3 {
+      margin-top: 0;
+      margin-bottom: 1rem;
+      color: var(--text-primary);
+      font-size: 1.1rem;
+    }
+
+    .footer-links {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .footer-links li {
+      margin-bottom: 0.5rem;
+    }
+
+    .footer-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: color 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .footer-links a:hover {
+      color: var(--primary);
+    }
+
+    .footer-bottom {
+      margin-top: 2rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border-color);
+      text-align: center;
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+    }
+
+    /* Modal Styles */
+    .modal {
+      position: fixed;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 2000;
+    }
+
+    .modal-content {
+      background: var(--surface-color);
+      color: var(--text-primary);
+      width: min(800px, 90vw);
+      max-height: 85vh;
+      overflow: auto;
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      border: 1px solid var(--border-color);
+    }
+
+    .modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.5rem;
+    }
+
+    .modal-header h3 {
+      margin: 0;
+      font-size: 1.5rem;
+    }
+
+    .close-btn {
+      background: var(--surface-alt);
+      border: none;
+      color: var(--text-primary);
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .close-btn:hover {
+      background: var(--danger);
+      color: white;
+    }
+
+    .form-group {
+      margin-bottom: 1rem;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+      color: var(--text-primary);
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 0.75rem;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      background: var(--surface-alt);
+      color: var(--text-primary);
+      font-size: 1rem;
+      transition: all 0.2s ease;
+    }
+
+    .form-control:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .form-actions {
+      display: flex;
+      gap: 0.75rem;
+      justify-content: flex-end;
+      margin-top: 1.5rem;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 1024px) {
+      .organizer-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .details-panel {
+        position: static;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .navbar-right-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--surface-color);
+        flex-direction: column;
+        padding: 1rem;
+        border-radius: 0 0 12px 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        border: 1px solid var(--border-color);
+        border-top: none;
+        z-index: 1000;
+      }
+      
+      .navbar-right-links.active {
+        display: flex;
+      }
+      
+      .hamburger-container {
+        display: flex;
+      }
+      
+      .header-top {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      
+      .header-actions {
+        width: 100%;
+        justify-content: space-between;
+      }
+      
+      .filters-row {
+        grid-template-columns: 1fr 1fr;
+      }
+      
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .filters-row {
+        grid-template-columns: 1fr;
+      }
+      
+      body {
+        padding: 0.5rem;
+      }
+      
+      .header-actions {
+        flex-direction: column;
+        width: 100%;
+      }
+      
+      .action-btn {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+
+    /* File Upload Preview */
+    .file-list {
+      margin-top: 1.5rem;
+    }
+
+    .file-item {
+      padding: 0.75rem 1rem;
+      background: var(--surface-alt);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      margin-bottom: 0.75rem;
+      font-size: 0.9rem;
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .preview-btn {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      font-weight: 500;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .preview-btn:hover {
+      background: var(--primary-dark);
+    }
+
+    .preview-img {
+      display: none;
+      width: 100%;
+      max-width: 300px;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      margin-top: 1rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .preview-frame {
+      height: 400px;
+    }
+
+    /* Animation for modal appearance */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: scale(0.9);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    .modal-content {
+      animation: fadeIn 0.3s ease;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <!-- Enhanced Navigation -->
+    <nav class="navbar" aria-label="Primary">
+      <div class="navbar-left">
+        <a href="index.html" class="nav-item nav-home-item">
+          <i class="fas fa-book-open"></i>
+          <span>ScholarSync</span>
+        </a>
+      </div>
+      <div class="hamburger-container" onclick="toggleMenu()" aria-label="Toggle Menu">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+      </div>
+      <div class="navbar-right-links" role="menubar" aria-label="Site">
+        <a href="about.html" class="nav-item" role="menuitem">About us</a>
+        <a href="blog.html" class="nav-item" role="menuitem">Blogs</a>
+        <a href="Faq.html" class="nav-item" role="menuitem">FAQ</a>
+        <a href="contact.html" class="nav-item" role="menuitem">Contact Us</a>
+        <button class="dark-toggle nav-item" id="darkModeToggle" title="Toggle Dark Mode" aria-pressed="false">
+          <i class="fas fa-moon" aria-hidden="true"></i>
+          <i class="fas fa-sun" aria-hidden="true"></i>
+          <span class="sr-only">Toggle dark mode</span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Header card -->
+    <header class="header">
+      <div class="header-top">
+        <div class="header-title">
+          <h1>ScholarSync</h1>
+          <p>Organize, track, and cite your research papers efficiently</p>
+        </div>
+        <div class="header-actions">
+          <button id="openAddPaper" class="action-btn">
+            <i class="fa-solid fa-plus"></i>
+            <span>Add Paper</span>
+          </button>
+          <button id="triggerUpload" class="action-btn secondary">
+            <i class="fa-solid fa-upload"></i>
+            <span>Upload Paper</span>
+          </button>
+          <button id="openSummarize" class="action-btn secondary">
+            <i class="fa-solid fa-file-lines"></i>
+            <span>Summarize Paper</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Filters Section -->
+    <section class="filters-section">
+      <div class="filters-row">
+        <select id="filterTopic" class="filter-select">
+          <option>All Topics</option>
+          <option>AI</option>
+          <option>Machine Learning</option>
+          <option>NLP</option>
+          <option>Data Science</option>
+        </select>
+        <select id="fromYear" class="filter-select">
+          <option>From Year</option>
+          <option>2015</option>
+          <option>2016</option>
+          <option>2017</option>
+          <option>2018</option>
+          <option>2019</option>
+          <option>2020</option>
+        </select>
+        <select id="toYear" class="filter-select">
+          <option>To Year</option>
+          <option>2021</option>
+          <option>2022</option>
+          <option>2023</option>
+          <option>2024</option>
+          <option>2025</option>
+        </select>
+        <select id="filterAuthor" class="filter-select">
+          <option>Filter by Author</option>
+          <option>Vaswani</option>
+          <option>Devlin</option>
+        </select>
+        <select id="filterPapers" class="filter-select">
+          <option>All Papers</option>
+          <option>Starred</option>
+          <option>Untagged</option>
+        </select>
+        <select id="filterRatings" class="filter-select">
+          <option>All Ratings</option>
+          <option>4★+</option>
+          <option>3★+</option>
+        </select>
+        <select id="sortOrder" class="filter-select">
+          <option>Default</option>
+          <option>Newest</option>
+          <option>Oldest</option>
+        </select>
+      </div>
+    </section>
+
+    <!-- Search Section -->
+    <section class="search-section">
+      <div class="search-box">
+        <i class="fas fa-search" aria-hidden="true"></i>
+        <input type="search" id="searchPapers" placeholder="Search papers by title, author, or tag" />
+      </div>
+    </section>
+
+    <!-- Tags Section -->
+    <section class="tags-section">
+      <div class="tags-row">
+        <span class="tag">web</span>
+        <span class="tag">ai</span>
+        <span class="tag">ml</span>
+        <span class="tag">nlp</span>
+        <span class="tag">deep learning</span>
+        <span class="tag">transformer</span>
+        <span class="tag">computer vision</span>
+      </div>
+    </section>
+
+    <!-- Main grid: list + details placeholder -->
+    <main class="organizer-grid">
+      <div class="papers-list-container">
+        <div class="papers-list">
+          <!-- Existing papers -->
+          <div id="papersList">
+            <!-- Papers will be dynamically added here -->
+          </div>
+          
+          <!-- Uploaded papers section -->
+          <div id="uploadedPapers">
+            <!-- Uploaded papers will appear here -->
+          </div>
+        </div>
+        <!-- Upload results area -->
+        <div id="uploadResults" class="file-list"></div>
+        <div class="prevImage"></div>
+      </div>
+      <aside class="details-panel" id="detailsPanel">
+        <div class="placeholder">
+          <i class="fas fa-hand-pointer"></i>
+          <p>Select a paper to see details</p>
+        </div>
+      </aside>
+    </main>
+
+    <!-- Enhanced Footer -->
+    <footer class="modern-footer" aria-label="Footer">
+  <div class="footer-top">
+    <div class="footer-links-section footer-card">
+      <h4>Support</h4>
+      <ul>
+        <li><a href="privacy.html"><i class="fas fa-user-shield"></i> Privacy Policy</a></li>
+        <li><a href="terms-of-service.html"><i class="fas fa-file-contract"></i> Terms of Services</a></li>
+        <li><a href="Faq.html"><i class="fas fa-question-circle"></i> FAQ</a></li>
+        <!-- <li><a href="https://github.com/supriya46788" target="_blank" title="GitHub"><i class="fab fa-github"></i>GitHub</a></li>
+        <li><a href="https://www.linkedin.com/in/supriyapandey595" target="_blank" title="LinkedIn"><i
+            class="fab fa-linkedin"></i>LinkedIn
+        </a></li> -->
+        <li><a href="mailto:renu89857@gmail.com" title="Email"><i class="fas fa-envelope"></i>Email
+        </a></li>
+      </ul>
+    </div>
+
+    <div class="footer-links-section footer-card">
+      <h4>Quick Links</h4>
+      <ul>
+        <li>
+          <a href="index.html"><i class="fas fa-home"></i>Home</a>
+        </li>
+        <li>
+          <a href="about.html"><i class="fas fa-users"></i>About Us</a>
+        </li>
+        <li>
+          <a href="contact.html"><i class="fas fa-envelope"></i>Contact</a>
+        </li>
+        <li><a href="tools.html"><i class="fas fa-tools"></i> Tools</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-links-section footer-card" aria-label="Footer resources">
+      <h4>Resources</h4>
+      <ul>
+        <li>
+          <a href="blog.html"><i class="fas fa-blog"></i> Blog</a>
+        </li>
+        <li>
+          <a href="glossary.html"><i class="fas fa-book"></i> Glossary</a>
+        </li>
+        <li>
+          <a href="Tag-Based-filtering.html"><i class="fas fa-tags"></i> Tag Based Filtering</a>
+        </li>
+        <li>
+          <a href="research ethics.html"><i class="fas fa-balance-scale"></i> Research Ethics</a>
+        </li>
+      </ul>
+    </div>
+
+    
+    <div class="footer-links-section footer-card subscribe-section">
+      <h4>Subscribe</h4>
+      <p>
+        Stay updated with the latest research tools, tips, and resources.
+        Join our newsletter for exclusive content delivered to your inbox.
+      </p>
+      <form class="subscribe-form" onsubmit="event.preventDefault(); alert('Thank you for subscribing!');">
+        <input type="email" placeholder="Enter your email" required />
+        <button type="submit">Subscribe</button>
+      </form>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    © 2025 ScholarSync | Made with
+    <span class="heart">&hearts;</span> for researchers worldwide
+  </div>
+</footer>
+
+
+  <!-- Hidden file input -->
+  <input type="file" id="fileUpload" multiple accept=".pdf,image/*" style="display:none;" />
+
+  <!-- Add Paper Modal -->
+  <div id="addPaperModal" class="modal" aria-hidden="true">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Add New Paper</h3>
+        <button id="closeAddPaper" class="close-btn"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <form id="addPaperForm">
+        <div class="form-group">
+          <label>Title *</label>
+          <input type="text" class="form-control" required />
+        </div>
+        <div class="form-group">
+          <label>Authors *</label>
+          <input type="text" class="form-control" required />
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Year</label>
+            <input type="number" min="1900" max="2100" class="form-control" />
+          </div>
+          <div class="form-group">
+            <label>Topic</label>
+            <input type="text" class="form-control" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Journal/Conference</label>
+          <input type="text" class="form-control" />
+        </div>
+        <div class="form-group">
+          <label>URL</label>
+          <input type="url" class="form-control" />
+        </div>
+        <div class="form-group">
+          <label>Tags (comma-separated)</label>
+          <input type="text" class="form-control" />
+        </div>
+        <div class="form-group">
+          <label>Abstract</label>
+          <textarea rows="4" class="form-control"></textarea>
+        </div>
+        <div class="form-group">
+          <label>Notes</label>
+          <textarea rows="3" class="form-control"></textarea>
+        </div>
+        <div class="form-actions">
+          <button type="button" id="modalUploadButton" class="action-btn secondary">
+            <i class="fa-solid fa-upload"></i> Upload PDF
+          </button>
+          <button type="submit" class="action-btn">
+            <i class="fa-solid fa-floppy-disk"></i> Save Paper
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Summarize Modal -->
+  <div id="summarizeModal" class="modal" aria-hidden="true">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Summarize Text</h3>
+        <button id="closeSummarize" class="close-btn"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div>
+        <div class="form-group">
+          <label>Paste text to summarize</label>
+          <textarea id="summarizeInput" rows="8" class="form-control"></textarea>
+        </div>
+        <div class="form-actions">
+          <!-- new upload PDF button + hidden file input -->
+          <button id="uploadPdfForSummary" class="action-btn secondary" type="button">
+            <i class="fa-solid fa-upload"></i> Upload PDF
+          </button>
+          <input type="file" id="summarizeFile" accept=".pdf" style="display:none;" />
+          <button id="runSummarize" class="action-btn" type="button">
+            <i class="fa-solid fa-wand-magic-sparkles"></i> Summarize
+          </button>
+        </div>
+        <div id="summarizeOutput" class="form-group" style="display:none;">
+          <label>Summary</label>
+          <div class="form-control" style="background: var(--surface-alt); min-height: 120px; padding: 1rem;">
+            <div id="summaryShort" style="margin-bottom:1rem;"></div>
+            <div id="summaryDetailed" style="margin-bottom:1rem;"></div>
+            <div id="summaryKeywords" style="font-size:0.95rem; color:var(--text-secondary);"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Page Scripts -->
+     <!-- PDF.js (for extracting text from uploaded PDFs) -->
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
+      <script>
+    // Toggle mobile menu (safe)
+    function toggleMenu() {
+      const menu = document.querySelector('.navbar-right-links');
+      if (!menu) return;
+      menu.classList.toggle('active');
+    }
+ 
+    // configure pdf.js worker (safe)
+    if (window.pdfjsLib) {
+      pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
+    }
+     
+    // Dark mode toggle (safe)
+    (function() {
+      const darkModeToggle = document.getElementById('darkModeToggle');
+      const body = document.body;
+
+      // Initialize dark mode
+      if (localStorage.getItem('darkMode') === 'enabled') {
+        body.classList.add('dark-mode');
+      } else if (!localStorage.getItem('darkMode') && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        body.classList.add('dark-mode');
+        localStorage.setItem('darkMode', 'enabled');
+      }
+
+      if (darkModeToggle) {
+        darkModeToggle.addEventListener('click', () => {
+          body.classList.toggle('dark-mode');
+          localStorage.setItem('darkMode', body.classList.contains('dark-mode') ? 'enabled' : 'disabled');
+        });
+      }
+    })();
+ 
+    // Dummy data for papers
+    const papers = [
+      {
+        id: 1,
+        title: 'Attention Is All You Need',
+        authors: 'Vaswani, A., Shazeer, N., Parmar, N., et al.',
+        year: 2017,
+        tags: ['#transformers', '#attention', '#nlp'],
+        rating: 5,
+        pdf: 'https://arxiv.org/pdf/1706.03762.pdf',
+        abstract: 'The dominant sequence transduction models are based on complex recurrent or convolutional neural networks that include an encoder and a decoder. The best performing models also connect the encoder and decoder through an attention mechanism. We propose a new simple network architecture, the Transformer, based solely on attention mechanisms, dispensing with recurrence and convolutions entirely.',
+        journal: 'NeurIPS 2017',
+        topic: 'NLP'
+      },
+      {
+        id: 2,
+        title: 'BERT: Pre-training of Deep Bidirectional Transformers',
+        authors: 'Devlin, J., Chang, M.-W., Lee, K., Toutanova, K.',
+        year: 2018,
+        tags: ['#bert', '#pre-training', '#bidirectional'],
+        rating: 4,
+        pdf: 'https://arxiv.org/pdf/1810.04805.pdf',
+        abstract: 'We introduce a new language representation model called BERT, which stands for Bidirectional Encoder Representations from Transformers. Unlike recent language representation models, BERT is designed to pre-train deep bidirectional representations from unlabeled text by jointly conditioning on both left and right context in all layers.',
+        journal: 'NAACL 2019',
+        topic: 'NLP'
+      },
+      {
+        id: 3,
+        title: 'Language Models are Few-Shot Learners',
+        authors: 'Brown, T., Mann, B., Ryder, N., et al.',
+        year: 2020,
+        tags: ['#gpt-3', '#few-shot', '#language-model'],
+        rating: 5,
+        pdf: 'https://arxiv.org/pdf/2005.14165.pdf',
+        abstract: 'Recent work has demonstrated substantial progress on many NLP tasks and benchmarks by pre-training on a large corpus of text followed by fine-tuning on a specific task. While typically task-agnostic in architecture, this method still requires task-specific fine-tuning datasets of thousands or tens of thousands of examples.',
+        journal: 'NeurIPS 2020',
+        topic: 'NLP'
+      }
+    ];
+
+    const papersList = document.getElementById('papersList');
+    const uploadedPapers = document.getElementById('uploadedPapers');
+    const detailsPanel = document.getElementById('detailsPanel');
+    let selectedPaperId = null;
+
+    function renderPapers() {
+      papersList.innerHTML = '';
+      papers.forEach(paper => {
+        const paperElement = document.createElement('article');
+        paperElement.className = `blog-card ${selectedPaperId === paper.id ? 'active' : ''}`;
+        paperElement.innerHTML = `
+          <div class="blog-content">
+            <h2>${paper.title}</h2>
+            <p>${paper.authors}</p>
+            <div class="tags">
+              ${paper.tags.map(tag => `<span class="badge badge-tools">${tag}</span>`).join('')}
+            </div>
+            <div class="card-footer">
+              <div style="display:flex; align-items:center; gap:0.6rem;">
+                <span style="color: var(--text-secondary);">${paper.year}</span>
+                <span class="rating">${'★'.repeat(paper.rating)}${'☆'.repeat(5 - paper.rating)}</span>
+              </div>
+              <div class="card-actions">
+                <i class="fa-regular fa-bookmark" title="Bookmark"></i>
+                <i class="fa-solid fa-link" title="Copy link"></i>
+                <i class="fa-regular fa-trash-can" title="Delete"></i>
+              </div>
+            </div>
+          </div>
+        `;
+        paperElement.addEventListener('click', () => renderDetails(paper));
+        papersList.appendChild(paperElement);
+      });
+    }
+
+    function renderDetails(paper) {
+      selectedPaperId = paper.id;
+      renderPapers(); // Re-render to update active state
+      
+      detailsPanel.innerHTML = `
+        <h2>${paper.title}</h2>
+        <p><strong>Authors:</strong> ${paper.authors}</p>
+        <p><strong>Year:</strong> ${paper.year}</p>
+        <p><strong>Journal/Conference:</strong> ${paper.journal}</p>
+        <p><strong>Topic:</strong> ${paper.topic}</p>
+        <p><strong>Rating:</strong> <span class="rating">${'★'.repeat(paper.rating)}${'☆'.repeat(5 - paper.rating)}</span></p>
+        <div class="tags" style="margin: 1rem 0;">${paper.tags.map(tag => `<span class="badge badge-tips">${tag}</span>`).join('')}</div>
+        <div style="margin: 1rem 0;">
+          <h3>Abstract</h3>
+          <p>${paper.abstract}</p>
+        </div>
+        <div style="display: flex; gap: 0.75rem; margin-top: 1.5rem;">
+          <a href="${paper.pdf}" target="_blank" class="action-btn">
+            <i class="fa-solid fa-file-pdf"></i> Read PDF
+          </a>
+          <button class="action-btn secondary">
+            <i class="fa-solid fa-quote-right"></i> Cite
+          </button>
+        </div>
+      `;
+    }
+
+    renderPapers();
+
+    // Handle file uploads (safe)
+    const fileUploadEl = document.getElementById('fileUpload');
+    if (fileUploadEl) {
+      fileUploadEl.addEventListener('change', function(e) {
+        const files = Array.from(e.target.files);
+        
+        files.forEach(file => {
+          if (file.type === 'application/pdf') {
+            // Create paper card for uploaded PDF
+            const paperCard = document.createElement('div');
+            paperCard.className = 'blog-card';
+            paperCard.innerHTML = `
+              <div class="blog-content">
+                <h2>${file.name}</h2>
+                <p>Uploaded document</p>
+                <div class="tags">
+                  <span class="badge">Uploaded</span>
+                </div>
+              </div>
+              <div class="card-footer">
+                <div class="card-actions">
+                  <i class="fas fa-eye" title="View"></i>
+                  <i class="fas fa-trash" title="Delete"></i>
+                </div>
+              </div>
+            `;
+            
+            uploadedPapers.appendChild(paperCard);
+          }
+        });
+      });
+    }
+
+    // File upload functionality (safe)
+    (function() {
+      const triggerUpload = document.getElementById('triggerUpload');
+      const fileInput = document.getElementById('fileUpload');
+      const fileList = document.getElementById('uploadResults');
+      const prevDiv = document.querySelector('.prevImage');
+
+      if (triggerUpload && fileInput) {
+        triggerUpload.addEventListener('click', () => fileInput.click());
+      }
+
+      if (fileInput) {
+        fileInput.addEventListener('change', () => {
+          if (fileList) fileList.innerHTML = '';
+          if (prevDiv) prevDiv.innerHTML = '';
+          Array.from(fileInput.files).forEach(file => {
+            const fileItem = document.createElement('div');
+            fileItem.className = 'file-item';
+            fileItem.innerHTML = `<span>${file.name}</span> (${(file.size / 1024).toFixed(1)} KB)`;
+
+            const previewBtn = document.createElement('button');
+            previewBtn.className = 'preview-btn';
+            previewBtn.innerHTML = '<i class="fa fa-eye"></i> Preview';
+
+            let previewEl;
+            if (file.type.startsWith('image/')) {
+              previewEl = document.createElement('img');
+              previewEl.className = 'preview-img';
+            } else {
+              previewEl = document.createElement('iframe');
+              previewEl.className = 'preview-frame preview-img';
+            }
+            previewEl.style.display = 'none';
+
+            previewBtn.addEventListener('click', () => {
+              if (previewEl.style.display === 'none') {
+                previewEl.src = URL.createObjectURL(file);
+                previewEl.style.display = 'block';
+                previewBtn.innerHTML = '<i class="fa fa-eye-slash"></i> Close Preview';
+              } else {
+                previewEl.style.display = 'none';
+                previewBtn.innerHTML = '<i class="fa fa-eye"></i> Preview';
+              }
+            });
+
+            fileItem.appendChild(previewBtn);
+            if (prevDiv) prevDiv.appendChild(previewEl);
+            if (fileList) fileList.appendChild(fileItem);
+          });
+        });
+      }
+    })();
+
+    // Modal controls (safe)
+     const openAddPaper = document.getElementById('openAddPaper');
+     const addPaperModal = document.getElementById('addPaperModal');
+     const closeAddPaper = document.getElementById('closeAddPaper');
+     const modalUploadButton = document.getElementById('modalUploadButton');
+     const openSummarize = document.getElementById('openSummarize');
+     const summarizeModal = document.getElementById('summarizeModal');
+     const closeSummarize = document.getElementById('closeSummarize');
+     const runSummarize = document.getElementById('runSummarize');
+     const summarizeInput = document.getElementById('summarizeInput');
+     const summarizeOutput = document.getElementById('summarizeOutput');
+
+    function showModal(modal, show) {
+      modal.style.display = show ? 'flex' : 'none';
+      modal.setAttribute('aria-hidden', show ? 'false' : 'true');
+    }
+
+    // Add Paper modal
+    if (openAddPaper && addPaperModal) openAddPaper.addEventListener('click', () => showModal(addPaperModal, true));
+    if (closeAddPaper && addPaperModal) closeAddPaper.addEventListener('click', () => showModal(addPaperModal, false));
+    if (addPaperModal) addPaperModal.addEventListener('click', (e) => { if (e.target === addPaperModal) showModal(addPaperModal, false); });
+
+    if (modalUploadButton && fileInput) {
+      modalUploadButton.addEventListener('click', () => fileInput.click());
+    }
+
+    // Summarize modal
+    if (openSummarize && summarizeModal) openSummarize.addEventListener('click', () => showModal(summarizeModal, true));
+    if (closeSummarize && summarizeModal) closeSummarize.addEventListener('click', () => showModal(summarizeModal, false));
+    if (summarizeModal) summarizeModal.addEventListener('click', (e) => { if (e.target === summarizeModal) showModal(summarizeModal, false); });
+ 
+    // summarization logic (shared) - more detailed extractive summarizer
+    function summarizeText(text) {
+      const cleaned = (text || '').replace(/\s+/g, ' ').trim();
+      if (!cleaned) {
+        alert('No text found to summarize.');
+        return;
+      }
+
+      // basic sentence split
+      const sentences = cleaned.match(/[^.!?\r\n]+[.!?]?/g) || [cleaned];
+
+      // tokenization & frequency (simple)
+      const stopwords = new Set([
+        'the','and','a','an','to','of','in','on','for','with','is','are','was','were','be','by','that','this','it','as','at','from','or','we','which','these','their','have','has','had'
+      ]);
+      const freq = {};
+      const words = cleaned
+        .toLowerCase()
+        .replace(/[^a-z0-9\s]/g, ' ')
+        .split(/\s+/)
+        .filter(w => w && !stopwords.has(w));
+      words.forEach(w => freq[w] = (freq[w] || 0) + 1);
+
+      // score sentences by sum of word frequencies
+      const sentenceScores = sentences.map((s, i) => {
+        const sWords = s.toLowerCase().replace(/[^a-z0-9\s]/g, ' ').split(/\s+/).filter(Boolean);
+        const score = sWords.reduce((acc, w) => acc + (freq[w] || 0), 0);
+        return { idx: i, s: s.trim(), score };
+      });
+
+      // choose sentences for summaries
+      const sortedByScore = [...sentenceScores].sort((a,b) => b.score - a.score);
+      const shortCount = Math.min(3, sentences.length);
+      const detailedCount = Math.min(7, sentences.length);
+
+      const shortSentences = sortedByScore.slice(0, shortCount).sort((a,b) => a.idx - b.idx).map(x => x.s);
+      const detailedSentences = sortedByScore.slice(0, detailedCount).sort((a,b) => a.idx - b.idx).map(x => x.s);
+
+      // top keywords
+      const keywords = Object.entries(freq).sort((a,b) => b[1] - a[1]).slice(0, 10).map(k => k[0]);
+
+      // build output
+      summarizeOutput.style.display = 'block';
+      document.getElementById('summaryShort').innerHTML = `<strong>Short summary:</strong><p>${shortSentences.join(' ')}</p>`;
+      document.getElementById('summaryDetailed').innerHTML = `<strong>Detailed summary:</strong><p>${detailedSentences.join(' ')}</p>`;
+      document.getElementById('summaryKeywords').innerHTML = `<strong>Key terms:</strong> ${keywords.join(', ')}`;
+    }
+
+    // run summarize only when user clicks Summarize
+    if (runSummarize) {
+      runSummarize.addEventListener('click', () => {
+        summarizeText(summarizeInput?.value || '');
+      });
+    }
+
+    // PDF upload -> extract text and populate textarea (do NOT auto-summarize)
+    const uploadPdfForSummary = document.getElementById('uploadPdfForSummary');
+    const summarizeFile = document.getElementById('summarizeFile');
+    if (uploadPdfForSummary && summarizeFile) {
+      uploadPdfForSummary.addEventListener('click', () => summarizeFile.click());
+
+      summarizeFile.addEventListener('change', async () => {
+        const file = summarizeFile.files && summarizeFile.files[0];
+        if (!file) return;
+        if (file.type !== 'application/pdf' && !file.name.toLowerCase().endsWith('.pdf')) {
+          alert('Please upload a PDF file.');
+          return;
+        }
+
+        const reader = new FileReader();
+        reader.onload = async function(e) {
+          try {
+            const arrayBuffer = e.target.result;
+            const loadingTask = pdfjsLib.getDocument({ data: arrayBuffer });
+            const pdf = await loadingTask.promise;
+            let fullText = '';
+            for (let p = 1; p <= pdf.numPages; p++) {
+              const page = await pdf.getPage(p);
+              const content = await page.getTextContent();
+              const strings = content.items.map(i => (i.str || '')).filter(Boolean);
+              fullText += strings.join(' ') + '\n\n';
+            }
+            // populate textarea but do NOT auto-summarize
+            summarizeInput.value = fullText;
+            summarizeOutput.style.display = 'none';
+            alert('PDF text loaded into the box. Click "Summarize" to generate summaries.');
+          } catch (err) {
+            console.error(err);
+            alert('Failed to extract text from PDF. The file may be scanned (image) or protected.');
+          }
+        };
+        reader.readAsArrayBuffer(file);
+      });
+    }
+
+    // Form handler (safe)
+    const addPaperForm = document.getElementById('addPaperForm');
+    if (addPaperForm) {
+      addPaperForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        // Get form data
+        const formData = new FormData(addPaperForm);
+        const title = addPaperForm.querySelector('input[type="text"]').value;
+        
+        // Add to papers array (in a real app, this would be saved to a database)
+        const newPaper = {
+          id: papers.length + 1,
+          title: title,
+          authors: addPaperForm.querySelectorAll('input[type="text"]')[1].value,
+          year: parseInt(addPaperForm.querySelector('input[type="number"]').value) || new Date().getFullYear(),
+          tags: addPaperForm.querySelectorAll('input[type="text"]')[5].value.split(',').map(tag => `#${tag.trim()}`),
+          rating: 0,
+          pdf: addPaperForm.querySelector('input[type="url"]').value,
+          abstract: addPaperForm.querySelectorAll('textarea')[0].value,
+          journal: addPaperForm.querySelectorAll('input[type="text"]')[3].value,
+          topic: addPaperForm.querySelectorAll('input[type="text"]')[4].value
+        };
+        
+        papers.push(newPaper);
+        renderPapers();
+        renderDetails(newPaper);
+        
+        alert('Paper saved successfully!');
+        showModal(addPaperModal, false);
+        addPaperForm.reset();
+      });
+    }
+
+    // Close modals with Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        if (addPaperModal && addPaperModal.style.display === 'flex') showModal(addPaperModal, false);
+        if (summarizeModal && summarizeModal.style.display === 'flex') showModal(summarizeModal, false);
+      }
+    });
+  </script>
+ </body>
+ 
+ </html>

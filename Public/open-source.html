@@ -1,0 +1,134 @@
+<!--open-source.html file-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Open Source Project | Scholarsync</title>
+  <link rel="stylesheet" href="./css/style.css" />
+  <link rel="stylesheet" href="landing.css" />
+  <link rel="shortcut icon" href="./favicon/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="landing.css" />
+  <link rel="stylesheet" href="css/open-source.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="icon" href="./favicon/favicon-48x48.png" type="image/png" />
+
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="./favicon/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="48x48"
+      href="./favicon/favicon-48x48.png"
+    />
+    <link rel="manifest" href="./favicon/site.webmanifest" />
+
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar">
+    <a href="index.html" class="nav-item">
+      Home
+    </a>
+    <!-- Hamburger div (shows only on mobile) -->
+    <div class="hamburger-container" onclick="toggleMenu()" aria-label="Toggle Menu">
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+    </div>
+    <div class="navbar-right-links">
+      <a href="about.html" class="nav-item">About us</a>
+      <a href="blog.html" class="nav-item">Blogs</a>
+      <a href="Faq.html" class="nav-item">FAQ</a>
+      <a href="contact.html" class="nav-item">Contact Us</a>
+      <a href="tools.html" class="nav-item">Tools</a>
+      <button class="dark-toggle nav-item" id="darkModeToggle" title="Toggle Dark Mode" onclick="toggleDarkMode()">
+        <i class="fas fa-sun"></i>
+      </button>
+    </div>
+  </nav>
+
+  <header class="open-source-header">
+    <h1>🌐 Open Source Community</h1>
+    <h2>Discover Projects • Contribute • Grow</h2>
+  </header>
+
+  <div class="controls">
+    <input type="text" id="searchInput" placeholder="Search repos by name or language..." />
+    <button onclick="searchRepos()">Search</button>
+    <button onclick="filterRepos('all')">All</button>
+    <button onclick="filterRepos('ai')">AI</button>
+    <button onclick="filterRepos('ml')">ML</button>
+    <button onclick="filterRepos('js')">JS</button>
+    <button onclick="filterRepos('html')">HTML</button>
+    <button onclick="filterRepos('css')">CSS</button>
+  </div>
+
+  <div class="repo-container" id="repo-container"></div>
+
+  <section class="contribute">
+    <h2>🤝 How to Contribute</h2>
+    <div class="contribute-grid">
+      <div class="contribute-card">
+        <h3>Fork & Clone</h3>
+        <p>
+          Fork the repo and clone it locally using <code>git clone</code>.
+        </p>
+      </div>
+      <div class="contribute-card">
+        <h3>Create a Branch</h3>
+        <p>
+          Create a feature branch with
+          <code>git checkout -b feature-name</code>.
+        </p>
+      </div>
+      <div class="contribute-card">
+        <h3>Make Changes</h3>
+        <p>Add your features or fix bugs with clean commits.</p>
+      </div>
+      <div class="contribute-card">
+        <h3>Submit PR</h3>
+        <p>Push and open a Pull Request for review.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="acknowledge">
+    <h2>🏆 Acknowledgements</h2>
+    <div class="ack-grid">
+      <div class="ack-card">
+        <h3>GSSoC</h3>
+        <p>
+          GirlScript Summer of Code empowers students to contribute to open
+          source projects with mentorship.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Back to Top Button -->
+  <button id="backToTop">
+    <i class="fa-solid fa-arrow-up"></i>
+  </button>
+
+  <!-- Modern Footer -->
+  <div id="footer-placeholder"></div>
+
+<script>
+  fetch("footer.html")
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById("footer-placeholder").innerHTML = data;
+    });
+</script>
+</body>
+<script src="js/open-source.js"></script>
+
+</html>

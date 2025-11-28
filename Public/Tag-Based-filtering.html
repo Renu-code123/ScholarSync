@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Smart Paper Filtering | ScholarSync</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="landing.css" />
+    <link rel="shortcut icon" href="./favicon/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="./favicon/favicon-48x48.png" type="image/png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png" />
+    <link rel="manifest" href="./favicon/site.webmanifest" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="landing.css" />
+    <link rel="stylesheet" href="css/open-source.css" />
+    <link rel="stylesheet" href="css/Tag-Based-filtering.css" />
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav class="navbar">
+      <a href="index.html" class="nav-item nav-home-item">
+        Home
+      </a>
+      <!-- Hamburger div (shows only on mobile) -->
+      <div class="hamburger-container" onclick="toggleMenu()" aria-label="Toggle Menu">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+      </div>
+      <div class="navbar-right-links">
+        <a href="about.html" class="nav-item">About us</a>
+        <a href="blog.html" class="nav-item">Blogs</a>
+        <a href="Faq.html" class="nav-item">FAQ</a>
+        <a href="contact.html" class="nav-item">Contact Us</a>
+        <a href="tools.html" class="nav-item">Tools</a>
+        <button
+          class="dark-toggle nav-item"
+          id="darkModeToggle"
+          title="Toggle Dark Mode"
+          onclick="toggleDarkMode()"
+        >
+          <i class="fas fa-sun"></i>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Scrolling Button -->
+    <button id="backToTop" title="Scroll" aria-label="Scroll">
+      <i class="fa-solid fa-arrow-down"></i>
+    </button>
+
+    <!-- ===== Heading ===== -->
+    <h1 class="tag-b-f-header">📚ScholarSync</h1>
+
+    <!-- ===== Tag Filter ===== -->
+    <div class="filter-bar">
+      <button class="filter-btn active" data-filter="all" onclick="filterPapers('all')">All</button>
+      <button class="filter-btn" data-filter="AI" onclick="filterPapers('AI')">AI</button>
+      <button class="filter-btn" data-filter="ML" onclick="filterPapers('ML')">ML</button>
+      <button class="filter-btn" data-filter="NLP" onclick="filterPapers('NLP')">NLP</button>
+      <button class="filter-btn" data-filter="CV" onclick="filterPapers('CV')">Computer Vision</button>
+      <button class="filter-btn" data-filter="Robotics" onclick="filterPapers('Robotics')">Robotics</button>
+      <button class="filter-btn" data-filter="Healthcare" onclick="filterPapers('Healthcare')">Healthcare</button>
+      <button class="filter-btn" data-filter="DataScience" onclick="filterPapers('DataScience')">Data Science</button>
+    </div>
+
+    <!-- ===== AI Tag Suggestion UI ===== -->
+
+    <!-- <div class="feature-card">
+      <h2>AI Tag Suggestions</h2>
+      <label
+        >Paper Title:
+        <input type="text" id="paperTitle" />
+      </label>
+      <label
+        >Paper Abstract:
+        <textarea id="paperAbstract" rows="4"></textarea>
+      </label>
+      <button onclick="showTagSuggestions()">Get Suggestions</button>
+      <p id="tagSuggestions"></p>
+    </div> -->
+
+    <!-- ===== Papers Grid ===== -->
+    <div class="papers" id="papers">
+      <div class="paper" data-tags="AI ML">
+        <h3>Neural Networks</h3>
+        <p class="authors">John Doe, MIT</p>
+        <p class="abstract">
+          Explores the fundamentals of neural networks and their applications in
+          pattern recognition and classification.
+        </p>
+        <p class="paper-tags">AI, ML</p>
+      </div>
+
+      <div class="paper" data-tags="NLP AI">
+        <h3>Transformer Models</h3>
+        <p class="authors">Jane Smith, Stanford</p>
+        <p class="abstract">
+          Introduction to transformer architectures for NLP tasks like
+          translation, summarization, and Q&A systems.
+        </p>
+        <p class="paper-tags">NLP, AI</p>
+      </div>
+
+      <div class="paper" data-tags="CV ML">
+        <h3>Image Recognition</h3>
+        <p class="authors">Alan Turing, Oxford</p>
+        <p class="abstract">
+          A study on convolutional neural networks and their impact on modern
+          computer vision applications.
+        </p>
+        <p class="paper-tags">CV, ML</p>
+      </div>
+
+      <div class="paper" data-tags="AI">
+        <h3>Explainable AI</h3>
+        <p class="authors">Rachel Green, Google AI</p>
+        <p class="abstract">
+          Techniques to make AI models interpretable, ensuring transparency and
+          trustworthiness in AI systems.
+        </p>
+        <p class="paper-tags">AI</p>
+      </div>
+
+      <div class="paper" data-tags="Robotics AI">
+        <h3>AI in Robotics</h3>
+        <p class="authors">Mike Johnson, CMU</p>
+        <p class="abstract">
+          Integration of AI algorithms in robotics for navigation, control, and
+          real-time decision-making.
+        </p>
+        <p class="paper-tags">Robotics, AI</p>
+      </div>
+
+      <div class="paper" data-tags="Healthcare AI ML">
+        <h3>AI for Healthcare</h3>
+        <p class="authors">Dr. Priya Mehta, Harvard</p>
+        <p class="abstract">
+          AI-powered diagnostic systems for early disease detection and
+          personalized treatment recommendations.
+        </p>
+        <p class="paper-tags">Healthcare, AI, ML</p>
+      </div>
+
+      <div class="paper" data-tags="DataScience ML">
+        <h3>Big Data Analytics</h3>
+        <p class="authors">Wei Zhang, Tsinghua</p>
+        <p class="abstract">
+          Efficient frameworks and ML pipelines for processing and analyzing
+          large-scale datasets.
+        </p>
+        <p class="paper-tags">DataScience, ML</p>
+      </div>
+
+      <div class="paper" data-tags="NLP">
+        <h3>Sentiment Analysis</h3>
+        <p class="authors">Maria Lopez, Toronto</p>
+        <p class="abstract">
+          Using NLP and deep learning techniques to determine sentiment polarity
+          in text data.
+        </p>
+        <p class="paper-tags">NLP</p>
+      </div>
+
+      <div class="paper" data-tags="CV AI">
+        <h3>Object Detection</h3>
+        <p class="authors">Kevin White, Meta AI</p>
+        <p class="abstract">
+          YOLO and Faster R-CNN models for real-time object detection in images
+          and videos.
+        </p>
+        <p class="paper-tags">CV, AI</p>
+      </div>
+
+      <div class="paper" data-tags="Robotics ML">
+        <h3>Autonomous Drones</h3>
+        <p class="authors">Sophia Turner, ETH Zurich</p>
+        <p class="abstract">
+          Design and implementation of autonomous drones using ML for navigation,
+          obstacle avoidance, and intelligent decision-making.
+        </p>
+        <p class="paper-tags">Robotics, ML</p>
+      </div>
+      
+      <div class="paper" data-tags="Healthcare NLP">
+        <h3>Medical Chatbots</h3>
+        <p class="authors">Dr. Ahmed Khan, Johns Hopkins</p>
+        <p class="abstract">
+          Development of NLP-based conversational agents to assist patients with
+          symptoms, diagnosis guidance, and mental health support.
+        </p>
+        <p class="paper-tags">Healthcare, NLP</p>
+      </div>
+      
+      <div class="paper" data-tags="DataScience CV">
+        <h3>Visual Data Mining</h3>
+        <p class="authors">Elena Rossi, University of Bologna</p>
+        <p class="abstract">
+          Leveraging computer vision techniques for extracting insights from large
+          image datasets and generating actionable business intelligence.
+        </p>
+        <p class="paper-tags">Data Science, CV</p>
+      </div>      
+    </div>
+
+    <!-- <script src="js/tag-suggest.js"></script> -->
+    <!-- <script src="js/cloud-sync.js"></script> -->
+    <!-- ===== Cloud Sync ===== -->
+    <!-- <div class="feature-card">
+      <h2>Cloud Sync</h2>
+      <label>
+        Upload Paper (PDF):
+        <input type="file" id="cloudPaperFile" accept="application/pdf" />
+      </label>
+      <button onclick="uploadPaperToCloud()">Upload to Cloud</button>
+      <div id="cloudUploadResult"></div>
+      <hr />
+      <label>
+        Download by File Name:
+        <input
+          type="text"
+          id="cloudFileName"
+          placeholder="Enter file name from cloud"
+        />
+      </label>
+      <button onclick="downloadPaperFromCloud()">Download from Cloud</button>
+    </div> -->
+
+    <!-- ===== Footer ===== -->
+    <div id="footer-placeholder"></div>
+
+<script>
+  fetch("footer.html")
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById("footer-placeholder").innerHTML = data;
+    });
+</script>
+  </body>
+  <script src="js/Tag-Based-filtering.js"></script>
+</html>
