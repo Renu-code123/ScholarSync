@@ -57,7 +57,7 @@ Disallow: /slider.css
 Disallow: /site.webmanifest
 
 # Sitemap location
-Sitemap: https://research-paper-organizer.vercel.app/sitemap.xml
+Sitemap: https://scholarsync.vercel.app/sitemap.xml
 
 # Crawl delay (optional - be respectful to servers)
 Crawl-delay: 1

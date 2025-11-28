@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ScholarSync - Organize Your Research Efficiently</title>
@@ -8,42 +8,31 @@
     <!-- SEO Meta Tags -->
     <meta name="description" content="Streamline your academic workflow with our intelligent research paper management system. Track, organize, and cite your papers efficiently in one centralized platform." />
     <meta name="keywords" content="research papers, academic research, paper organizer, citation management, research workflow, academic tools, paper management, research organization" />
-    <meta name="author" content="Research Paper Organizer Team" />
-    <meta name="robots" content="index, follow" />
-    <meta name="theme-color" content="#2563eb" />
-    <link rel="canonical" href="https://research-paper-organizer.vercel.app/" />
-    
+    <meta name="author" content="ScholarSync Team" />
+    <link rel="canonical" href="https://scholarsync.vercel.app/" />
+
     <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="Research Paper Organizer - Organize Your Research Efficiently" />
+    <meta property="og:title" content="ScholarSync - Organize Your Research Efficiently" />
     <meta property="og:description" content="Streamline your academic workflow with our intelligent research paper management system. Track, organize, and cite your papers efficiently in one centralized platform." />
-    <meta property="og:image" content="https://research-paper-organizer.vercel.app/og-image.png" />
-    <meta property="og:url" content="https://research-paper-organizer.vercel.app/" />
-    <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="Research Paper Organizer" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="Research Paper Organizer - Academic Research Management Tool" />
-    
+    <meta property="og:image" content="/og-image.png" />
+    <meta property="og:url" content="/" />
+    <meta property="og:site_name" content="ScholarSync" />
+
     <!-- Twitter Card Meta Tags -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Research Paper Organizer - Organize Your Research Efficiently" />
+    <meta name="twitter:title" content="ScholarSync - Organize Your Research Efficiently" />
     <meta name="twitter:description" content="Streamline your academic workflow with our intelligent research paper management system. Track, organize, and cite your papers efficiently in one centralized platform." />
-    <meta name="twitter:image" content="https://research-paper-organizer.vercel.app/og-image.png" />
-    <meta name="twitter:image:alt" content="Research Paper Organizer - Academic Research Management Tool" />
-    
+    <meta name="twitter:image" content="/og-image.png" />
+
     <!-- Additional SEO Meta Tags -->
-    <meta name="application-name" content="Research Paper Organizer" />
-    <meta name="apple-mobile-web-app-title" content="Research Paper Organizer" />
+    <meta name="application-name" content="ScholarSync" />
+    <meta name="apple-mobile-web-app-title" content="ScholarSync" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="default" />
     <meta name="format-detection" content="telephone=no" />
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="msapplication-TileColor" content="#2563eb" />
     <meta name="msapplication-config" content="/browserconfig.xml" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 
     <link rel="stylesheet" href="./css/style.css" />
     <link rel="stylesheet" href="landing.css" />
@@ -72,19 +61,20 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
       crossorigin="anonymous"
     />
-  </head>
-  <script>
-    if ("serviceWorker" in navigator) {
-      window.addEventListener("load", () => {
-        navigator.serviceWorker
-          .register("./js/sw.js")
-          .then((reg) => console.log("Service Worker registered:", reg.scope))
-          .catch((err) => console.error("SW registration failed:", err));
-      });
-    }
-  </script>
+</head>
+<script>
+  // service worker registration (unchanged)
+  if ("serviceWorker" in navigator) {
+    window.addEventListener("load", () => {
+      navigator.serviceWorker
+        .register("./js/sw.js")
+        .then((reg) => console.log("Service Worker registered:", reg.scope))
+        .catch((err) => console.error("SW registration failed:", err));
+    });
+  }
+</script>
 
-  <body>
+<body>
     <!-- Loading Screen -->
     <div id="loading-screen">
       <div class="loading-background-animation"></div>
@@ -721,7 +711,7 @@
             name: "Sarah Chen",
             role: "PhD Student",
             avatar: "https://randomuser.me/api/portraits/women/1.jpg",
-            feedback: "The Research Paper Organizer makes it easy to keep my reading list structured and searchable. It's saved me hours during literature reviews.",
+            feedback: "ScholarSync makes it easy to keep my reading list structured and searchable. It's saved me hours during literature reviews.",
             tags: "Research • Organization"
           },
           {
@@ -1260,11 +1250,16 @@
     <div id="footer-placeholder"></div>
 
 <script>
-  fetch("footer.html")
-    .then(response => response.text())
-    .then(data => {
-      document.getElementById("footer-placeholder").innerHTML = data;
-    });
+  // defensive: only run if footer-placeholder exists (fetch already ok)
+  const footerPlaceholder = document.getElementById("footer-placeholder");
+  if (footerPlaceholder) {
+    fetch("footer.html")
+      .then(response => response.text())
+      .then(data => {
+        footerPlaceholder.innerHTML = data;
+      })
+      .catch(() => { /* ignore fetch errors during build */ });
+  }
 </script>
 
     <script src="landing.js"></script>
@@ -1285,25 +1280,13 @@
       document.addEventListener("DOMContentLoaded", function () {
         const loadingScreen = document.getElementById("loading-screen");
         const loadingText = document.getElementById("loading-text");
-
         const target = document.querySelector(".typing-text");
-        const progressPercentage = document.querySelector(
-          ".progress-percentage"
-        );
-        const texts = [
-          "Organizing your thoughts...",
-          "Drafting your ideas...",
-          "Structuring your research...",
-          "Building your knowledge...",
-        ];
+        const progressPercentage = document.querySelector(".progress-percentage");
 
-        let index = 0;
-        let progress = 0;
+        // guard usage
+        const hasSeenLoading = window.localStorage && localStorage.getItem("hasSeenLoading");
 
         //changed: check if user has already seen the loading screen
-        const hasSeenLoading = localStorage.getItem("hasSeenLoading");
-
-        //changed: Only run loadinganimation if first-time visitor
         if (!hasSeenLoading) {
           // Enhanced text transition function
           function updateLoadingText() {
@@ -1341,7 +1324,7 @@
 
           // Enhanced entrance animation
           setTimeout(() => {
-            loadingScreen.classList.add("show");
+            loadingScreen?.classList.add("show");
             updateProgress();
           }, 100);
 
@@ -1350,12 +1333,9 @@
 
           // Hide loading screen after 6 seconds with enhanced exit animation
           setTimeout(() => {
-            clearInterval(textInterval); // stop changing text
-            loadingScreen.classList.add("hidden");
-
-            //changed: Mark that user has seen loading
-            localStorage.setItem("hasSeenLoading", "true");
-            //Added typewriter effect in heading
+            clearInterval(textInterval);
+            loadingScreen?.classList.add("hidden");
+            localStorage?.setItem("hasSeenLoading", "true");
             if (target) {
               const text = target.textContent;
               target.textContent = "";
@@ -1370,26 +1350,12 @@
               }
               typeWriter();
             }
-            //after that added sideLeft and slide right animation
-            document.querySelector(".hero-content").classList.add("animate");
-            document.querySelector(".hero-image").classList.add("animate");
-
-            // Add exit preparation with scale and rotation
-            loadingScreen.style.transform = "scale(1.08) rotate(1deg)";
-            loadingScreen.style.filter = "blur(1px)";
-
-            setTimeout(() => {
-              loadingScreen.classList.add("hidden");
-              //after that added sideLeft and slide right animation
-              document.querySelector(".hero-content").classList.add("animate");
-              document.querySelector(".hero-image").classList.add("animate");
-            }, 300);
-          }, 6000); // adjust as needed
+            document.querySelector(".hero-content")?.classList.add("animate");
+            document.querySelector(".hero-image")?.classList.add("animate");
+          }, 6000);
         } else {
           //changed: Skip loading entirely for returning visitors
-          loadingScreen.classList.add("hidden");
-
-          //Run typewriter effect and hero animations immediately
+          loadingScreen?.classList.add("hidden");
           if (target) {
             const text = target.textContent;
             target.textContent = "";
@@ -1403,8 +1369,8 @@
             }
             typeWriter();
           }
-          document.querySelector(".hero-content").classList.add("animate");
-          document.querySelector(".hero-image").classList.add("animate");
+          document.querySelector(".hero-content")?.classList.add("animate");
+          document.querySelector(".hero-image")?.classList.add("animate");
         }
       });
 
@@ -1416,58 +1382,46 @@
       //Scroll to back & top button
       // Show button when scrolled down
       const bottomToTopButton = document.getElementById("backToTop");
-      const icon = bottomToTopButton.querySelector("i");
+      if (bottomToTopButton) {
+        const icon = bottomToTopButton.querySelector("i");
 
-      window.addEventListener("scroll", () => {
-        if (window.scrollY > 100) {
-          bottomToTopButton.style.display = "block";
-
-          if (
-            window.scrollY + window.innerHeight >=
-            document.documentElement.scrollHeight - 10
-          ) {
-            icon.classList.remove("fa-arrow-down");
-            icon.classList.add("fa-arrow-up");
+        window.addEventListener("scroll", () => {
+          if (window.scrollY > 100) {
+            bottomToTopButton.style.display = "block";
+            if (window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 10) {
+              icon?.classList.remove("fa-arrow-down");
+              icon?.classList.add("fa-arrow-up");
+            } else {
+              icon?.classList.remove("fa-arrow-up");
+              icon?.classList.add("fa-arrow-down");
+            }
           } else {
-            icon.classList.remove("fa-arrow-up");
-            icon.classList.add("fa-arrow-down");
+            bottomToTopButton.style.display = "none";
           }
-        } else {
-          bottomToTopButton.style.display = "none";
-        }
-      });
+        });
 
-      bottomToTopButton.addEventListener("click", () => {
-        if (icon.classList.contains("fa-arrow-down")) {
-          // scroll to bottom
-          window.scrollTo({
-            top: document.documentElement.scrollHeight,
-            behavior: "smooth",
-          });
-        } else {
-          // scroll to top
-          window.scrollTo({ top: 0, behavior: "smooth" });
-        }
-      });
+        bottomToTopButton.addEventListener("click", () => {
+          if (icon?.classList.contains("fa-arrow-down")) {
+            // scroll to bottom
+            window.scrollTo({ top: document.documentElement.scrollHeight, behavior: "smooth" });
+          } else {
+            // scroll to top
+            window.scrollTo({ top: 0, behavior: "smooth" });
+          }
+        });
+      }
     </script>
 
+    <!-- IntersectionObserver script (guarded) -->
     <script>
       document.addEventListener("DOMContentLoaded", () => {
-        const elements = document.querySelectorAll(
-          ".fade-in, .slide-left, .slide-right"
-        );
-
-        const observer = new IntersectionObserver(
-          (entries) => {
-            entries.forEach((entry) => {
-              if (entry.isIntersecting) {
-                entry.target.classList.add("show");
-              }
-            });
-          },
-          { threshold: 0.2 }
-        );
-
+        const elements = document.querySelectorAll(".fade-in, .slide-left, .slide-right");
+        if (!elements || elements.length === 0) return;
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) entry.target.classList.add("show");
+          });
+        }, { threshold: 0.2 });
         elements.forEach((el) => observer.observe(el));
       });
     </script>
@@ -1476,75 +1430,56 @@
     <script>
       const toggle = document.querySelector(".mobile-menu-toggle");
       const navLinksMenu = document.querySelector(".nav-links");
-
-      toggle.addEventListener("click", () => {
-        navLinksMenu.classList.toggle("active");
-        // toggle.classList.toggle("open"); // for rotating icon if you want
-      });
-      // Close menu when a link is clicked
-      navLinksMenu.querySelectorAll("a").forEach((link) => {
-        link.addEventListener("click", () => {
-          navLinksMenu.classList.remove("active");
+      if (toggle && navLinksMenu) {
+        toggle.addEventListener("click", () => {
+          navLinksMenu.classList.toggle("active");
         });
-      });
+        navLinksMenu.querySelectorAll("a").forEach((link) => {
+          link.addEventListener("click", () => {
+            navLinksMenu.classList.remove("active");
+          });
+        });
+      }
     </script>
+
     <script>
-      // Dark mode functionality
+      // Dark mode functionality (guarded)
       document.addEventListener("DOMContentLoaded", () => {
         const darkModeToggle = document.getElementById("darkModeToggle");
-        const icon = darkModeToggle.querySelector("i");
         const navLinks = document.querySelector(".nav-links");
+        if (!darkModeToggle) return;
+        const icon = darkModeToggle.querySelector("i");
 
         function updateNavLinksBackground() {
           if (document.body.classList.contains("dark-mode")) {
-            navLinks.style.backgroundColor = "#1e293b";
+            navLinks && (navLinks.style.backgroundColor = "#1e293b");
           } else {
-            navLinks.style.backgroundColor = "white";
+            navLinks && (navLinks.style.backgroundColor = "white");
           }
         }
 
         // Check for saved dark mode preference
-        if (localStorage.getItem("darkMode") === "enabled") {
+        if (localStorage?.getItem("darkMode") === "enabled") {
           document.body.classList.add("dark-mode");
-          icon.classList.replace("fa-moon", "fa-sun");
+          icon && icon.classList.replace("fa-moon", "fa-sun");
           updateNavLinksBackground();
         }
 
         darkModeToggle.addEventListener("click", () => {
           document.body.classList.toggle("dark-mode");
-
-          // Update icon and save preference
           if (document.body.classList.contains("dark-mode")) {
-            icon.classList.replace("fa-moon", "fa-sun");
-            localStorage.setItem("darkMode", "enabled");
+            icon && icon.classList.replace("fa-moon", "fa-sun");
+            localStorage?.setItem("darkMode", "enabled");
           } else {
-            icon.classList.replace("fa-sun", "fa-moon");
-            localStorage.setItem("darkMode", "disabled");
+            icon && icon.classList.replace("fa-sun", "fa-moon");
+            localStorage?.setItem("darkMode", "disabled");
           }
           updateNavLinksBackground();
         });
       });
     </script>
-    <script>
-      function openSidebar() {
-        document.getElementById("sidebar").style.width = "250px";
-      }
 
-      function closeSidebar() {
-        document.getElementById("sidebar").style.width = "0";
-      }
-
-      const toggleDarkMode = () => {
-    document.body.classList.toggle('dark-mode');
-    localStorage.setItem(
-        'darkMode',
-        document.body.classList.contains('dark-mode') ? 'enabled' : 'disabled'
-    );
-};
-
-    </script>
-
-<!-- Floating Feedback Button -->
+    <!-- Floating Feedback Button -->
 <button id="feedbackFab" aria-label="Open feedback" title="Send feedback">💬</button>
 
 <!-- Feedback Modal -->

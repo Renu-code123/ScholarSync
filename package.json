@@ -11,5 +11,6 @@
   "description": "",
   "dependencies": {
     "vite": "^7.2.1"
-  }
+  },
+  "homepage": "https://scholarsync.vercel.app"
 }

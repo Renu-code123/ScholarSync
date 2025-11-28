@@ -6,7 +6,7 @@
 
   <!-- Homepage -->
   <url>
-    <loc>https://research-paper-organizer.vercel.app/</loc>
+    <loc>https://scholarsync.vercel.app/</loc>
     <lastmod>2025-01-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
@@ -14,21 +14,21 @@
 
   <!-- Main Pages -->
   <url>
-    <loc>https://research-paper-organizer.vercel.app/home.html</loc>
+    <loc>https://scholarsync.vercel.app/home.html</loc>
     <lastmod>2025-01-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <url>
-    <loc>https://research-paper-organizer.vercel.app/about.html</loc>
+    <loc>https://scholarsync.vercel.app/about.html</loc>
     <lastmod>2025-01-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://research-paper-organizer.vercel.app/contact.html</loc>
+    <loc>https://scholarsync.vercel.app/contact.html</loc>
     <lastmod>2025-01-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -36,63 +36,63 @@
 
   <!-- Feature Pages -->
   <url>
-    <loc>https://research-paper-organizer.vercel.app/tools.html</loc>
+    <loc>https://scholarsync.vercel.app/tools.html</loc>
     <lastmod>2025-01-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://research-paper-organizer.vercel.app/add-organize-papers.html</loc>
+    <loc>https://scholarsync.vercel.app/add-organize-papers.html</loc>
     <lastmod>2025-01-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://research-paper-organizer.vercel.app/summarize.html</loc>
+    <loc>https://scholarsync.vercel.app/summarize.html</loc>
     <lastmod>2025-01-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
-    <loc>https://research-paper-organizer.vercel.app/pdf-annotator.html</loc>
+    <loc>https://scholarsync.vercel.app/pdf-annotator.html</loc>
     <lastmod>2025-01-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
-    <loc>https://research-paper-organizer.vercel.app/pdf-viewer.html</loc>
+    <loc>https://scholarsync.vercel.app/pdf-viewer.html</loc>
     <lastmod>2025-01-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
-    <loc>https://research-paper-organizer.vercel.app/Tag-Based-filtering.html</loc>
+    <loc>https://scholarsync.vercel.app/Tag-Based-filtering.html</loc>
     <lastmod>2025-01-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
-    <loc>https://research-paper-organizer.vercel.app/ats-checker.html</loc>
+    <loc>https://scholarsync.vercel.app/ats-checker.html</loc>
     <lastmod>2025-01-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
 
   <url>
-    <loc>https://research-paper-organizer.vercel.app/hemingway.html</loc>
+    <loc>https://scholarsync.vercel.app/hemingway.html</loc>
     <lastmod>2025-01-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
 
   <url>
-    <loc>https://research-paper-organizer.vercel.app/Pdfconverter.html</loc>
+    <loc>https://scholarsync.vercel.app/Pdfconverter.html</loc>
     <lastmod>2025-01-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
@@ -100,28 +100,28 @@
 
   <!-- Information Pages -->
   <url>
-    <loc>https://research-paper-organizer.vercel.app/blog.html</loc>
+    <loc>https://scholarsync.vercel.app/blog.html</loc>
     <lastmod>2025-01-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
 
   <url>
-    <loc>https://research-paper-organizer.vercel.app/Faq.html</loc>
+    <loc>https://scholarsync.vercel.app/Faq.html</loc>
     <lastmod>2025-01-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
 
   <url>
-    <loc>https://research-paper-organizer.vercel.app/glossary.html</loc>
+    <loc>https://scholarsync.vercel.app/glossary.html</loc>
     <lastmod>2025-01-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
 
   <url>
-    <loc>https://research-paper-organizer.vercel.app/open-source.html</loc>
+    <loc>https://scholarsync.vercel.app/open-source.html</loc>
     <lastmod>2025-01-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -129,35 +129,35 @@
 
   <!-- User Account Pages -->
   <url>
-    <loc>https://research-paper-organizer.vercel.app/signup.html</loc>
+    <loc>https://scholarsync.vercel.app/signup.html</loc>
     <lastmod>2025-01-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
-    <loc>https://research-paper-organizer.vercel.app/login.html</loc>
+    <loc>https://scholarsync.vercel.app/login.html</loc>
     <lastmod>2025-01-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
-    <loc>https://research-paper-organizer.vercel.app/forgot-password.html</loc>
+    <loc>https://scholarsync.vercel.app/forgot-password.html</loc>
     <lastmod>2025-01-27</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
 
   <url>
-    <loc>https://research-paper-organizer.vercel.app/profile.html</loc>
+    <loc>https://scholarsync.vercel.app/profile.html</loc>
     <lastmod>2025-01-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
 
   <url>
-    <loc>https://research-paper-organizer.vercel.app/profile-settings.html</loc>
+    <loc>https://scholarsync.vercel.app/profile-settings.html</loc>
     <lastmod>2025-01-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
@@ -165,14 +165,14 @@
 
   <!-- Legal Pages -->
   <url>
-    <loc>https://research-paper-organizer.vercel.app/privacy.html</loc>
+    <loc>https://scholarsync.vercel.app/privacy.html</loc>
     <lastmod>2025-01-27</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
 
   <url>
-    <loc>https://research-paper-organizer.vercel.app/terms-of-service.html</loc>
+    <loc>https://scholarsync.vercel.app/terms-of-service.html</loc>
     <lastmod>2025-01-27</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
@@ -180,7 +180,7 @@
 
   <!-- Development Pages -->
   <url>
-    <loc>https://research-paper-organizer.vercel.app/roadmap.html</loc>
+    <loc>https://scholarsync.vercel.app/roadmap.html</loc>
     <lastmod>2025-01-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
