@@ -1,0 +1,247 @@
+html,
+body {
+  height: 100%;
+  margin: 0;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system,
+    BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+body {
+  background: var(--background-dark);
+  color: var(--text-light);
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+  justify-content: flex-start;
+  min-height: 100vh;
+  padding: 28px;
+}
+.container {
+  width: 100%;
+  max-width: 800px;
+  background: var(--surface-dark);
+  border-radius: 12px;
+  padding: 22px;
+  box-shadow: 0 6px 30px rgba(0, 0, 0, 0.4);
+}
+h1 {
+  margin: 0 0 6px;
+  font-size: 20px;
+  color: var(--text-light);
+}
+p.lead {
+  margin: 0 0 16px;
+  color: var(--primary);
+}
+
+.card {
+  background: var(--surface-dark);
+  padding: 14px;
+  border-radius: 10px;
+}
+label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-light);
+  margin-bottom: 6px;
+  background-color: var(--surface-dark);
+  padding: 10px 15px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.controls input[type="file"] {
+  display: block;
+}
+
+.heading {
+  text-align: center;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--text-light); 
+  margin-bottom: 6px;
+}
+
+.controls {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--surface-dark);
+  height: 200px;
+  border-radius: 10px;
+  margin-bottom: 12px;
+}
+
+.result-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--surface-dark);
+  height: 200px;
+  border-radius: 10px;
+  margin-bottom: 12px;
+}
+
+.input-resume, .input-jd {
+  margin: 15px;
+  border-radius: 10px;
+}
+
+#resumeFileName, #jdFileName {
+  margin-left: 8px;
+  color: var(--accent);
+  background-color: var(--surface-dark);
+  font-weight: 600;
+  padding: 6px 12px;
+}
+
+#resumeFile, #jdFile {
+  display: none;
+}
+
+.custom-file {
+  display: inline-block;
+  padding: 10px 14px;
+  border-radius: 8px;
+  background: var(--surface-dark);
+  color: var(--text-secondary);
+  cursor: pointer;
+}
+.btn {
+  display: inline-block;
+  padding: 10px 14px;
+  border-radius: 8px;
+  background: var(--primary);
+  color: var(--text-light);
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  margin-top: 10px;
+}
+.results {
+  margin-top: 12px;
+}
+
+.score-wrapper {
+  position: relative;
+  width: 140px;
+  height: 40px;
+  margin: 20px auto;
+}
+
+.progress-ring__background {
+  fill: none;
+  stroke: var(--surface-dark);
+  stroke-width: 12;
+}
+
+.progress-ring__circle {
+  fill: none;
+  stroke: var(--primary);
+  stroke-width: 12;
+  stroke-linecap: round;
+  transform: rotate(-90deg);
+  transform-origin: 50% 50%;
+  transition: stroke-dashoffset 900ms cubic-bezier(.2,.8,.2,1);
+}
+
+.score {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 40px;
+  font-weight: 700;
+  color: var(--primary);
+  text-align: center;
+}
+
+.list {
+  margin: 8px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.pill {
+  display: inline-block;
+  padding: 6px 8px;
+  border-radius: 999px;
+  background: var(--surface-dark);
+  margin: 6px 6px 0 0;
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+.small {
+  font-size: 16px;
+  margin: 4px;
+  text-align: center;
+  color: var(--text-secondary);
+}
+
+.results {
+  font-size: 20px;
+  text-align: center;
+}
+.check {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-top: 6px;
+}
+input[type="checkbox"] {
+    display: none;
+  }
+
+
+.check label {
+  position: relative;
+  padding-left: 35px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.check-label {
+  position: relative;
+  padding-left: 40px !important;
+  cursor: pointer;
+  font-size: 12px !important;
+  background-color:var(--surface-dark)
+}
+
+.check label::before {
+  content: "";
+  position: absolute;
+  left: 6px;
+  top: 8px;
+  width: 25px;
+  height: 25px;
+  border: 2px solid var(--border-color);
+  border-radius: 4px;
+  background-color: var(--surface-dark);
+  box-sizing: border-box;
+}
+
+.check input[type="checkbox"]:checked + label::after {
+  content: "";
+  position: absolute;
+  left: 13px;
+  top: 10px;
+  width: 6px;
+  height: 11px;
+  border: solid var(--primary);
+  border-width: 0 5px 5px 0;
+  transform: rotate(45deg);
+}
+
+.check label:hover::before {
+  background-color: var(--background-dark);
+}
+
+.check input[type="checkbox"]:disabled + label::before {
+  background-color: var(--surface-dark);
+  border-color: var(--border-color);
+}
+footer {
+  margin-top: 12px;
+  color: var(--text-secondary);
+  font-size: 13px;
+}
